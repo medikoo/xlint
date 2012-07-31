@@ -1,0 +1,28 @@
+{
+  "name": "xlint",
+  "version": "0.1.0",
+  "description": "Code Quality Tool",
+  "scripts": {
+    "test": "node node_modules/tad/bin/tad lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/xlint.git"
+  },
+  "keywords": [
+    "lint",
+    "jslint",
+    "jshint",
+    "linter",
+    "quality",
+    "code",
+    "debugger",
+    "validation"
+  ],
+  "author": "Mariusz Nowak <medikoo+xlint@medikoo.com>",
+  "bugs": {
+    "mail": "medikoo+xlint@medikoo.com",
+    "url": "https://github.com/medikoo/xlint/issues"
+  },
+  "license": "MIT"
+}
