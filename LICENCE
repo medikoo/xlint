@@ -25,3 +25,6 @@ This license applies to everything except:
 1. JSLint, located at external/jslint.js, is copyright Douglas Crockford.
 JSLint is provided under a customized MIT license, which is included in
 the header of external/jslint.js.
+
+2. JSHint, located at external/jshint.js and is provided under a customized MIT
+license, which is included in the header of external/jshint.js.
