@@ -1,0 +1,28 @@
+# Comment
+
+@root
+
+adsafe
+bitwise
+devel
+!debug
+predef one, two
+
+./foo/bar
+
+!browser # comment
+cap
+predef+ foo,bar #comment
+
+./marko-zagalo.js
+predef- morda, mala
+
+./
+# comment
+devel
+!adsafe
+eqeq
+predef- raz, dwa, one
+
+
+#comment
