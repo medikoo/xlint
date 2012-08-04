@@ -1,0 +1,10 @@
+fragment
+!newcap
+!evil
+predef+ prelast
+predef- zoom
+
+./foo.js
+nomen
+!continue
+predef+ last

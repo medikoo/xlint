@@ -1,0 +1,16 @@
+@root
+
+adsafe
+bitwise
+!browser
+cap
+continue
+newcap
+predef foo,bar, zoom
+
+./raz
+
+!bitwise
+eqeq
+es5
+predef+ raz
