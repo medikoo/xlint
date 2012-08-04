@@ -1,7 +1,7 @@
 {
   "name": "xlint",
   "version": "0.1.0",
-  "description": "Code Quality Tool",
+  "description": "Extendable lint (JSLint/JSHint) solution. Code quality tool.",
   "scripts": {
     "test": "node node_modules/tad/bin/tad lib"
   },

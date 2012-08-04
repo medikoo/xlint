@@ -1,2 +1,1 @@
-# xlint - Universal lint solution for Node.js modules
-
+# xlint - Extendable lint (JSLint/JSHint) solution for JavaScript. Code quality tool.
