@@ -1,0 +1,10 @@
+@root
+
+adsafe
+predef foo,bar
+!browser
+eqeq
+
+./raz
+
+bitwise
