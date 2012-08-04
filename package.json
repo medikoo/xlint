@@ -24,7 +24,7 @@
     "mail": "medikoo+xlint@medikoo.com",
     "url": "https://github.com/medikoo/xlint/issues"
   },
-  dependencies: {
+  "dependencies": {
     "deferred": "git://github.com/medikoo/deferred.git",
     "es5-ext": "git://github.com/medikoo/es5-ext.git",
     "next": "git://github.com/medikoo/node-ext.git"
