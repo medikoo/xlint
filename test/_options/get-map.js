@@ -7,9 +7,10 @@ var isCopy  = require('es5-ext/lib/Object/is-copy')
   , path = resolve(__dirname, '../__playground/get-map')
 
 module.exports = function (t, a, d) {
-	var path2 = resolve(path, './foo/bar');
+	var path2 = resolve(path, './foo/bar'), watcher;
 
-	t(path2, true)(function (data) {
+	watcher = t(path2, true);
+	watcher(function (data) {
 		var copy, map, map1, map2, mod;
 		map1 = { root: true };
 		map2 = {};
@@ -45,5 +46,6 @@ module.exports = function (t, a, d) {
 		// console.log("DATA", inspect(data, false, Infinity));
 		// console.log("COPY", inspect(copy, false, Infinity));
 		a(isCopy(data, copy, Infinity), true);
+		watcher.close();
 	}).end(d, d);
 };
