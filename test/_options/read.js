@@ -7,7 +7,9 @@ var isCopy  = require('es5-ext/lib/Object/is-copy')
   , path = resolve(__dirname, '../__playground/read/raz/dwa/foo.js');
 
 module.exports = function (t, a, d) {
-	t(path, true)(function (opts) {
+	var watcher;
+	watcher = t(path, true);
+	watcher(function (opts) {
 		var copy = {
 			adsafe: true,
 			predef: ['foo', 'last', 'marko', 'prelast', 'raz'],
@@ -20,5 +22,6 @@ module.exports = function (t, a, d) {
 		// console.log("OPTS", inspect(opts, false, Infinity));
 		// console.log("COPY", inspect(copy, false, Infinity));
 		a(isCopy(opts, copy, Infinity), true);
+		watcher.close();
 	}).end(d, d);
 };
