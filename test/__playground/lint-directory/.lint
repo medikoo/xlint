@@ -1,0 +1,7 @@
+@root
+
+bitwise
+predef foo, bar, zoom
+
+./raz
+!bitwise
