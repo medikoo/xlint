@@ -98,6 +98,13 @@ module.exports = function (t) {
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a(isCopy(events, copy, Infinity), true, "Ignore change: Events");
+				events = [];
+				return writeFile(ignorePath, ignoreOrgSrc);
+			}, DELAY))(delay(function () {
+				var copy = [
+					{ type: 'remove', name: 'raz/bar.js' }
+				];
+				a(isCopy(events, copy, Infinity), true, "Ignore revert change: Events");
 				watcher.close();
 				return deferred(writeFile(filePath, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc),
