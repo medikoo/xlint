@@ -1,6 +1,7 @@
 'use strict';
 
-var isCopy    = require('es5-ext/lib/Object/is-copy')
+var forEach   = require('es5-ext/lib/Object/for-each')
+  , isCopy    = require('es5-ext/lib/Object/is-copy')
   , deferred  = require('deferred')
   , delay     = deferred.delay
   , promisify = deferred.promisify
@@ -19,6 +20,20 @@ var isCopy    = require('es5-ext/lib/Object/is-copy')
   , optsPath = resolve(path, '.lint')
   , ignorePath = resolve(path, '.lintignore')
   , cachePath = resolve(path, '.lintcache')
+
+  , clearOptions;
+
+clearOptions = function (data) {
+	if (Array.isArray(data)) {
+		data.forEach(function (value) {
+			if (value.report) delete value.report.options;
+		});
+	} else {
+		forEach(data, function (value) {
+			delete value.options;
+		});
+	}
+};
 
 module.exports = function (t) {
 	return {
@@ -43,6 +58,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				clearOptions(data);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a(isCopy(data, copy, Infinity), true, "Report");
@@ -67,6 +83,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
+				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(filePath)(function (data) {
@@ -82,6 +99,7 @@ module.exports = function (t) {
 							message: '\'foo\' was used before it was defined.' }
 					] }
 				];
+				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(ignorePath)(function (data) {
@@ -99,6 +117,7 @@ module.exports = function (t) {
 				];
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
+				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Ignore change: Events");
 				events = [];
 				return writeFile(ignorePath, ignoreOrgSrc);
@@ -129,6 +148,7 @@ module.exports = function (t) {
 				};
 				// console.log("DATA", inspect(report, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
+				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
 				return t([file1Path, file2Path, filePath],
 					{ cache: true })(function (r2) {
