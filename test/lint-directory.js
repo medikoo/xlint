@@ -169,7 +169,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
-				a(isCopy(events, copy, Infinity), true, "Report");
+				a(isCopy(events, copy, Infinity), true, "Events");
 			}).end(d, d);
 		}
 	};
