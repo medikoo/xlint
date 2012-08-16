@@ -26,6 +26,7 @@
     "url": "https://github.com/medikoo/xlint/issues"
   },
   "dependencies": {
+    "cli-color": "git://github.com/medikoo/cli-color.git",
     "deferred": "git://github.com/medikoo/deferred.git",
     "es5-ext": "git://github.com/medikoo/es5-ext.git",
     "event-emitter": "git://github.com/medikoo/event-emitter.git",
