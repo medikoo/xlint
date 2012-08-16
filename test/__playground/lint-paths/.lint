@@ -1,0 +1,4 @@
+@root
+
+bitwise
+predef foo, fooelse
