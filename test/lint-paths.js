@@ -1,15 +1,14 @@
 'use strict';
 
-var forEach   = require('es5-ext/lib/Object/for-each')
-  , isCopy    = require('es5-ext/lib/Object/is-copy')
-  , deferred  = require('deferred')
-  , delay     = deferred.delay
-  , promisify = deferred.promisify
-  , isBuffer  = Buffer.isBuffer
-  , fs        = require('fs')
-  , resolve   = require('path').resolve
-  , inspect   = require('util').inspect
+var isCopy       = require('es5-ext/lib/Object/is-copy')
+  , deferred     = require('deferred')
+  , fs           = require('fs')
+  , resolve      = require('path').resolve
+  , inspect      = require('util').inspect
+  , clearOptions = require('./__clear-options')
 
+  , delay = deferred.delay, promisify = deferred.promisify
+  , isBuffer = Buffer.isBuffer
   , readFile = promisify(fs.readFile), writeFile = promisify(fs.writeFile)
   , unlink = promisify(fs.unlink)
 
@@ -18,20 +17,6 @@ var forEach   = require('es5-ext/lib/Object/for-each')
   , optsPath = resolve(path, 'dir1/.lint')
   , ignorePath = resolve(path, 'raz/dir2/.lintignore')
   , cachePath = resolve(path, '.lintcache')
-
-  , clearOptions;
-
-clearOptions = function (data) {
-	if (Array.isArray(data)) {
-		data.forEach(function (value) {
-			if (value.report) delete value.report.options;
-		});
-	} else {
-		forEach(data, function (value) {
-			delete value.options;
-		});
-	}
-};
 
 module.exports = function (t) {
 	var paths = [

@@ -1,26 +1,12 @@
 'use strict';
 
-var forEach   = require('es5-ext/lib/Object/for-each')
-  , isCopy    = require('es5-ext/lib/Object/is-copy')
-  , resolve   = require('path').resolve
-  , inspect   = require('util').inspect
+var isCopy       = require('es5-ext/lib/Object/is-copy')
+  , resolve      = require('path').resolve
+  , inspect      = require('util').inspect
+  , clearOptions = require('./__clear-options')
 
   , path = resolve(__dirname, '__playground/lint-path')
   , filePath = resolve(path, 'raz/dwa/other-test.js')
-
-  , clearOptions;
-
-clearOptions = function (data) {
-	if (Array.isArray(data)) {
-		data.forEach(function (value) {
-			if (value.report) delete value.report.options;
-		});
-	} else {
-		forEach(data, function (value) {
-			delete value.options;
-		});
-	}
-};
 
 module.exports = function (t) {
 	return {
@@ -78,6 +64,7 @@ module.exports = function (t) {
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				delete data.options;
+				delete data.src;
 				a(isCopy(data, copy, Infinity), true);
 				linter.close();
 			}).end(d, d);
