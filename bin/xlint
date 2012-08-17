@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var lintPaths = require('../lib/lint-paths')
+  , report    = require('../lib/console-report')
+
+  , opts = require('optimist')
+	.usage("Usage: $0 <options> <paths>...", {
+		color: {
+			boolean: true,
+			default: true,
+			description: "(Non JSLint) Colorize output"
+		},
+		help: {
+			boolean: true,
+			desription: "(Non JSLint) Show this help"
+		},
+		maxerrfiles: {
+		default: 5,
+			description: "(Non JSLint) Maximum number of files for "
+				+ "which warnings are reported"
+		}
+	})
+  , argv = opts.argv
+  , paths = argv._;
+
+if (argv.help) {
+	console.log(opts.help());
+	process.exit(0);
+}
+
+delete argv._;
+delete argv.$0;
+
+if (!paths.length) {
+	paths.push('.');
+}
+
+if (argv.progress == null) {
+	argv.progress = true;
+}
+if (argv.depth == null) {
+	argv.depth = Infinity;
+}
+report(lintPaths(paths, argv), argv).end();
