@@ -65,6 +65,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				delete data.options;
 				delete data.src;
+				delete data.path;
 				a(isCopy(data, copy, Infinity), true);
 				linter.close();
 			}).end(d, d);

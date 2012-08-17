@@ -9,12 +9,14 @@ module.exports = function (data) {
 			if (value.report) {
 				delete value.report.options;
 				delete value.report.src;
+				delete value.report.path;
 			}
 		});
 	} else {
 		forEach(data, function (value) {
 			delete value.options;
 			delete value.src;
+			delete value.path;
 		});
 	}
 };
