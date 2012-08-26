@@ -7,6 +7,10 @@ var lintPaths = require('../lib/lint-paths')
 
   , opts = require('optimist')
 	.usage("Usage: $0 <options> <paths>...", {
+		cache: {
+			boolean: true,
+			description: "Cache generated reports (for faster retieval later)"
+		},
 		color: {
 			boolean: true,
 			default: true,
@@ -28,15 +32,15 @@ var lintPaths = require('../lib/lint-paths')
 		},
 		depth: {
 			default: Infinity,
-			description: "How deeply to recurse into directories"
+			description: "How deeply to recurse into directories (default: Infinity)"
 		},
 		ignoreRules: {
 			default: 'git',
-			description: "Whether to obey ruled found in .gitignore files"
+			description: "Obey ignore rules up to given mode"
 		},
 		watch: {
 			boolean: true,
-			description: "Live console mode. Watch files for changes"
+			description: "Live console mode, updated on file and settings changes"
 		}
 	})
   , argv = opts.argv
