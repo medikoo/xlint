@@ -17,9 +17,26 @@ var lintPaths = require('../lib/lint-paths')
 			desription: "(Non JSLint) Show this help"
 		},
 		maxerrfiles: {
-		default: 5,
+			default: 5,
 			description: "(Non JSLint) Maximum number of files for "
 				+ "which warnings are reported"
+		},
+		progress: {
+			boolean: true,
+			default: true,
+			description: "Whether to generate reports on the go"
+		},
+		depth: {
+			default: Infinity,
+			description: "How deeply to recurse into directories"
+		},
+		ignoreRules: {
+			default: 'git',
+			description: "Whether to obey ruled found in .gitignore files"
+		},
+		watch: {
+			boolean: true,
+			description: "Live console mode. Watch files for changes"
 		}
 	})
   , argv = opts.argv
@@ -37,10 +54,8 @@ if (!paths.length) {
 	paths.push('.');
 }
 
-if (argv.progress == null) {
-	argv.progress = true;
+if (argv.watch) {
+	setTimeout(function () { }, 1e9);
 }
-if (argv.depth == null) {
-	argv.depth = Infinity;
-}
+
 report(lintPaths(paths, argv), argv).end();
