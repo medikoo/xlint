@@ -9,6 +9,7 @@ var lintPaths = require('../lib/lint-paths')
 	.usage("Usage: $0 <options> <paths>...", {
 		cache: {
 			boolean: true,
+			default: true,
 			description: "Cache generated reports (for faster retieval later)"
 		},
 		color: {
