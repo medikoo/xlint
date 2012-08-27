@@ -2,10 +2,11 @@
 
 'use strict';
 
-var lintPaths = require('../lib/lint-paths')
-  , report    = require('../lib/console-report')
+var some      = require('es5-ext/lib/Object/some')
+  , lintPaths = require('../lib/lint-paths')
+  , clc       = require('cli-color')
 
-  , opts = require('optimist')
+  , optimist = require('optimist')
 	.usage("Usage: $0 <options> <paths>...", {
 		cache: {
 			boolean: true,
@@ -17,9 +18,18 @@ var lintPaths = require('../lib/lint-paths')
 			default: true,
 			description: "Colorize output"
 		},
+		depth: {
+			default: Infinity,
+			description: "How deeply to recurse into directories (default: Infinity)"
+		},
 		help: {
 			boolean: true,
 			desription: "Show this help"
+		},
+		ignoreRules: {
+			default: 'git',
+			description: "Obey ignore rules up to given mode "
+				+ "(Currently just 'git' is supported)"
 		},
 		progress: {
 			boolean: true,
@@ -27,37 +37,46 @@ var lintPaths = require('../lib/lint-paths')
 			description: "Whether to generate reports on the go "
 				+ "(while file system is scanned)"
 		},
-		depth: {
-			default: Infinity,
-			description: "How deeply to recurse into directories (default: Infinity)"
-		},
-		ignoreRules: {
-			default: 'git',
-			description: "Obey ignore rules up to given mode "
-				+ "(Currently just 'git' is supported)"
-		},
 		watch: {
 			boolean: true,
 			description: "Live console mode, updated on file and settings changes"
 		}
 	})
-  , argv = opts.argv
-  , paths = argv._;
+  , options = optimist.argv
+  , paths = options._
+  , reporter;
 
-if (argv.help) {
-	console.log(opts.help());
+if (options.help) {
+	console.log(optimist.help());
 	process.exit(0);
 }
 
-delete argv._;
-delete argv.$0;
+delete options._;
+delete options.$0;
 
 if (!paths.length) {
 	paths.push('.');
 }
 
-if (argv.watch) {
+if (options.watch) {
+	// Keep process persistent
 	setTimeout(function () { }, 1e9);
 }
 
-report(lintPaths(paths, argv), argv).end();
+if (options.watch && (clc.width > 10) && (clc.height > 10)) {
+	reporter = require('../lib/reporters/console-watch');
+} else if (options.progress) {
+	reporter = require('../lib/reporters/console-progress');
+} else {
+	reporter = require('../lib/reporters/console');
+}
+
+reporter = reporter(lintPaths(paths, options), options);
+reporter.end();
+process.on('exit', function () {
+	reporter.end(function (data) {
+		process.exit(some(data, function (report) {
+			return report.length;
+		}) ? 1 : 0);
+	});
+});
