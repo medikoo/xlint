@@ -10,7 +10,7 @@ var lintPaths = require('../lib/lint-paths')
 		cache: {
 			boolean: true,
 			default: true,
-			description: "Cache generated reports (for faster retieval later)"
+			description: "Cache generated reports (for faster retrieval later)"
 		},
 		color: {
 			boolean: true,
@@ -21,15 +21,11 @@ var lintPaths = require('../lib/lint-paths')
 			boolean: true,
 			desription: "Show this help"
 		},
-		maxerrfiles: {
-			default: 5,
-			description: "Maximum number of files for "
-				+ "which warnings are reported"
-		},
 		progress: {
 			boolean: true,
 			default: true,
-			description: "Whether to generate reports on the go"
+			description: "Whether to generate reports on the go "
+				+ "(while file system is scanned)"
 		},
 		depth: {
 			default: Infinity,
@@ -37,7 +33,8 @@ var lintPaths = require('../lib/lint-paths')
 		},
 		ignoreRules: {
 			default: 'git',
-			description: "Obey ignore rules up to given mode"
+			description: "Obey ignore rules up to given mode "
+				+ "(Currently just 'git' is supported)"
 		},
 		watch: {
 			boolean: true,
