@@ -3,11 +3,12 @@
 'use strict';
 
 var some      = require('es5-ext/lib/Object/some')
-  , lintPaths = require('../lib/lint-paths')
   , clc       = require('cli-color')
+  , lintPaths = require('../lib/lint-paths')
+  , getLinter = require('../lib/_get-linter')
 
   , optimist = require('optimist')
-	.usage("Usage: $0 <options> <paths>...", {
+	.usage("usage: $0 [options] <linter> [<paths>]", {
 		cache: {
 			boolean: true,
 			default: true,
@@ -41,15 +42,17 @@ var some      = require('es5-ext/lib/Object/some')
 			boolean: true,
 			description: "Live console mode, updated on file and settings changes"
 		}
-	})
+	}).demand(1)
   , options = optimist.argv
-  , paths = options._
-  , reporter;
+  , linter, paths, reporter;
 
 if (options.help) {
 	console.log(optimist.help());
 	process.exit(0);
 }
+
+linter = getLinter(options._[0]);
+paths = options._.slice(1);
 
 delete options._;
 delete options.$0;
@@ -71,7 +74,7 @@ if (options.watch && (clc.width > 10) && (clc.height > 10)) {
 	reporter = require('../lib/reporters/console');
 }
 
-reporter = reporter(lintPaths(paths, options), options);
+reporter = reporter(lintPaths(linter, paths, options), options);
 reporter.end();
 process.on('exit', function () {
 	reporter.end(function (data) {

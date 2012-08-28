@@ -6,6 +6,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
   , clearOptions = require('./__clear-options')
+  , linter       = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
   , isBuffer = Buffer.isBuffer
@@ -26,7 +27,7 @@ module.exports = function (t) {
 			var watcher, DELAY = 100, events = []
 			  , fileOrgSrc, optsOrgSrc, ignoreOrgSrc;
 
-			watcher = t([file1Path, file2Path, filePath], { watch: true });
+			watcher = t(linter, [file1Path, file2Path, filePath], { watch: true });
 			watcher.on('change', function (data) {
 				events.push(data);
 			});
@@ -118,7 +119,7 @@ module.exports = function (t) {
 			}, DELAY)).end(d, d);
 		},
 		"Cache": function (a, d) {
-			t([file1Path, file2Path, filePath], { cache: true })(function (report) {
+			t(linter, [file1Path, file2Path, filePath], { cache: true })(function (report) {
 				var copy = {
 					'test.js': [
 						{ line: 5, character: 1,
@@ -135,7 +136,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
-				return t([file1Path, file2Path, filePath],
+				return t(linter, [file1Path, file2Path, filePath],
 					{ cache: true })(function (r2) {
 						a.deep(r2, report, "Taken from cache");
 						return unlink(cachePath);

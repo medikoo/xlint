@@ -4,6 +4,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
   , clearOptions = require('./__clear-options')
+  , linter       = require('./__linter')
 
   , path = resolve(__dirname, '__playground/lint-path')
   , filePath = resolve(path, 'raz/dwa/other-test.js')
@@ -11,12 +12,12 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
 module.exports = function (t) {
 	return {
 		"Directory": function (a, d) {
-			var linter, events = [];
-			linter = t(path, { depth: Infinity, progress: true, watch: true });
-			linter.on('change', function (data) {
+			var lint, events = [];
+			lint = t(linter, path, { depth: Infinity, progress: true, watch: true });
+			lint.on('change', function (data) {
 				events.push(data);
 			});
-			linter(function (data) {
+			lint(function (data) {
 				var copy = {
 					'test.js': [
 						{ line: 5, character: 1,
@@ -49,12 +50,12 @@ module.exports = function (t) {
 				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Events");
 
-				linter.close();
+				lint.close();
 			}).end(d, d);
 		},
 		"File": function (a, d) {
-			var linter;
-			(linter = t(filePath, { watch: true }))(function (data) {
+			var lint;
+			(lint = t(linter, filePath, { watch: true }))(function (data) {
 				var copy = { "": [
 					{ line: 2, character: 11,
 						message: 'Unexpected \'&\'.' },
@@ -65,7 +66,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true);
-				linter.close();
+				lint.close();
 			}).end(d, d);
 		}
 	};

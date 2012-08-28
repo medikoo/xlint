@@ -6,6 +6,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
   , clearOptions = require('./__clear-options')
+  , linter       = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
   , isBuffer = Buffer.isBuffer
@@ -24,7 +25,7 @@ module.exports = function (t) {
 			var watcher, DELAY = 100, events = []
 			  , fileOrgSrc, optsOrgSrc, ignoreOrgSrc;
 
-			watcher = t(path, { watch: true, depth: Infinity });
+			watcher = t(linter, path, { watch: true, depth: Infinity });
 			watcher.on('change', function (data) {
 				events.push(data);
 			});
@@ -117,7 +118,7 @@ module.exports = function (t) {
 			}, DELAY)).end(d, d);
 		},
 		"Cache": function (a, d) {
-			t(path, { cache: true, depth: Infinity })(function (report) {
+			t(linter, path, { cache: true, depth: Infinity })(function (report) {
 				var copy = {
 					'test.js': [
 						{ line: 5, character: 1,
@@ -134,7 +135,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
-				return t(path, { cache: true, depth: Infinity })(function (r2) {
+				return t(linter, path, { cache: true, depth: Infinity })(function (r2) {
 					a.deep(r2, report, "Taken from cache");
 					return unlink(cachePath);
 				});
@@ -142,7 +143,7 @@ module.exports = function (t) {
 		},
 		"Progress": function (a, d) {
 			var events = [], reader;
-			reader = t(path, { depth: Infinity, progress: true });
+			reader = t(linter, path, { depth: Infinity, progress: true });
 			reader.on('change', function (data) {
 				events.push(data);
 			});

@@ -6,6 +6,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
   , clearOptions = require('./__clear-options')
+  , linter       = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
   , isBuffer = Buffer.isBuffer
@@ -32,7 +33,7 @@ module.exports = function (t) {
 			var watcher, DELAY = 100, events = []
 			  , fileOrgSrc, optsOrgSrc, ignoreOrgSrc;
 
-			watcher = t(paths, { watch: true, depth: Infinity });
+			watcher = t(linter, paths, { watch: true, depth: Infinity });
 			watcher.on('change', function (data) {
 				events.push(data);
 			});
@@ -133,7 +134,7 @@ module.exports = function (t) {
 			}, DELAY)).end(d, d);
 		},
 		"Cache": function (a, d) {
-			t(paths, { cache: true, depth: Infinity })(function (report) {
+			t(linter, paths, { cache: true, depth: Infinity })(function (report) {
 				var copy = {
 					'raz/dir2/test.js': [
 						{ line: 5, character: 1,
@@ -164,7 +165,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
-				return t(paths, { cache: true, depth: Infinity })(function (r2) {
+				return t(linter, paths, { cache: true, depth: Infinity })(function (r2) {
 					a.deep(r2, report, "Taken from cache");
 					return unlink(cachePath);
 				});
@@ -172,7 +173,7 @@ module.exports = function (t) {
 		},
 		"Progress": function (a, d) {
 			var events = [], reader;
-			reader = t(paths, { depth: Infinity, progress: true });
+			reader = t(linter, paths, { depth: Infinity, progress: true });
 			reader.on('change', function (data) {
 				events.push(data);
 			});
@@ -204,13 +205,13 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
-				// console.log("DATA", inspect(report, false, Infinity));
-				// console.log("COPY", inspect(copy, false, Infinity));
 				clearOptions(data);
+				// console.log("DATA", inspect(data, false, Infinity));
+				// console.log("COPY", inspect(copy, false, Infinity));
 				a(isCopy(data, copy, Infinity), true, "Report");
 
 				compare = function (a, b) {
-					return a.name.localeCompare(b);
+					return a.name.localeCompare(b.name);
 				};
 				copy = [
 					{ type: 'add', name: 'raz/dir2/test.js', report: [
@@ -239,7 +240,10 @@ module.exports = function (t) {
 					] }
 				].sort(compare);
 				clearOptions(events);
-				a(isCopy(events.sort(compare), copy, Infinity), true, "Events");
+				events.sort(compare);
+				// console.log("DATA", inspect(events, false, Infinity));
+				// console.log("COPY", inspect(copy, false, Infinity));
+				a(isCopy(events, copy, Infinity), true, "Events");
 			}).end(d, d);
 		}
 	};

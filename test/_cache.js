@@ -11,14 +11,14 @@ var deferred  = require('deferred')
   , path = resolve(__dirname, '__playground/_cache/test.js');
 
 module.exports = function (t, a, d) {
-	var report = {};
-	t.get(path, { foo: true })(function (cache) {
+	var report = {}, linter = { xlintId: 'TEST' };
+	t.get(linter, path, { foo: true })(function (cache) {
 		a(cache, null, "get: New");
-		t.save(path, { foo: true }, report);
+		t.save(linter, path, { foo: true }, report);
 	})(delay(function () {
-		return t.get(path, { foo: true })(function (result) {
+		return t.get(linter, path, { foo: true })(function (result) {
 			a(result, report, "get: Saved");
-			return t.get(path, { bar: true });
+			return t.get(linter, path, { bar: true });
 		});
 	}, 100))(function (result) {
 		a(result, null, "get: Other");
