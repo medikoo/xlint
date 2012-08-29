@@ -1,12 +1,12 @@
 'use strict';
 
-var isCopy       = require('es5-ext/lib/Object/is-copy')
-  , deferred     = require('deferred')
-  , fs           = require('fs')
-  , resolve      = require('path').resolve
-  , inspect      = require('util').inspect
-  , clearOptions = require('./__clear-options')
-  , linter       = require('./__linter')
+var isCopy    = require('es5-ext/lib/Object/is-copy')
+  , deferred  = require('deferred')
+  , fs        = require('fs')
+  , resolve   = require('path').resolve
+  , inspect   = require('util').inspect
+  , normalize = require('./__normalize-reports')
+  , linter    = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
   , isBuffer = Buffer.isBuffer
@@ -42,9 +42,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true, "Report");
 				return readFile(optsPath)(function (data) {
 					optsOrgSrc = String(data);
@@ -67,7 +67,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(filePath)(function (data) {
@@ -83,7 +83,7 @@ module.exports = function (t) {
 							message: '\'foo\' was used before it was defined.' }
 					] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(ignorePath)(function (data) {
@@ -99,9 +99,9 @@ module.exports = function (t) {
 							message: '\'marko\' was used before it was defined.' }
 					] }
 				];
+				normalize(events, copy);
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Ignore change: Events");
 				events = [];
 				return writeFile(ignorePath, ignoreOrgSrc);
@@ -109,7 +109,7 @@ module.exports = function (t) {
 				var copy = [
 					{ type: 'remove', name: 'raz/bar.js' }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Ignore revert change: Events");
 				watcher.close();
 				return deferred(writeFile(filePath, fileOrgSrc),
@@ -131,9 +131,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(report, copy);
 				// console.log("DATA", inspect(report, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
 				return t(linter, path, { cache: true, depth: Infinity })(function (r2) {
 					a.deep(r2, report, "Taken from cache");
@@ -160,9 +160,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(data, copy);
 				// console.log("DATA", inspect(report, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true, "Report");
 
 				copy = [
@@ -177,7 +177,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Events");
 			}).end(d, d);
 		}

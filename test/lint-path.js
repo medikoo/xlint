@@ -3,7 +3,7 @@
 var isCopy       = require('es5-ext/lib/Object/is-copy')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
-  , clearOptions = require('./__clear-options')
+  , normalize = require('./__normalize-reports')
   , linter       = require('./__linter')
 
   , path = resolve(__dirname, '__playground/lint-path')
@@ -30,9 +30,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true, "Report");
 
 				copy = [
@@ -47,7 +47,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Events");
 
 				lint.close();
@@ -62,9 +62,9 @@ module.exports = function (t) {
 					{ line: 4, character: 1,
 						message: '\'zoom\' was used before it was defined.' }
 				] };
+				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true);
 				lint.close();
 			}).end(d, d);

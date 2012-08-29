@@ -5,7 +5,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , fs           = require('fs')
   , resolve      = require('path').resolve
   , inspect      = require('util').inspect
-  , clearOptions = require('./__clear-options')
+  , normalize = require('./__normalize-reports')
   , linter       = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
@@ -64,9 +64,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(data);
 				a(isCopy(data, copy, Infinity), true, "Report");
 				return readFile(optsPath)(function (data) {
 					optsOrgSrc = String(data);
@@ -89,7 +89,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(filePath)(function (data) {
@@ -100,7 +100,7 @@ module.exports = function (t) {
 				var copy = [
 					{ type: 'update', name: 'dwa/footka.js', report: [] }
 				];
-				clearOptions(events);
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Options change: Events");
 				events = [];
 				return readFile(ignorePath)(function (data) {
@@ -116,9 +116,9 @@ module.exports = function (t) {
 							message: '\'marko\' was used before it was defined.' }
 					] }
 				];
+				normalize(events, copy);
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(events);
 				a(isCopy(events, copy, Infinity), true, "Ignore change: Events");
 				events = [];
 				return writeFile(ignorePath, ignoreOrgSrc);
@@ -161,9 +161,9 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
+				normalize(report, copy);
 				// console.log("DATA", inspect(report, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				clearOptions(report);
 				a(isCopy(report, copy, Infinity), true, "Report");
 				return t(linter, paths, { cache: true, depth: Infinity })(function (r2) {
 					a.deep(r2, report, "Taken from cache");
@@ -205,7 +205,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					]
 				};
-				clearOptions(data);
+				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a(isCopy(data, copy, Infinity), true, "Report");
@@ -239,7 +239,7 @@ module.exports = function (t) {
 							message: '\'zoom\' was used before it was defined.' }
 					] }
 				].sort(compare);
-				clearOptions(events);
+				normalize(events, copy);
 				events.sort(compare);
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
