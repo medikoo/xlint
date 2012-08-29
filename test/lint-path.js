@@ -56,7 +56,7 @@ module.exports = function (t) {
 		"File": function (a, d) {
 			var lint;
 			(lint = t(linter, filePath, { watch: true }))(function (data) {
-				var copy = { "": [
+				var copy = { ".": [
 					{ line: 2, character: 11,
 						message: 'Unexpected \'&\'.' },
 					{ line: 4, character: 1,
