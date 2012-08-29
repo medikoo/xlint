@@ -141,9 +141,9 @@ module.exports = function (t) {
 				});
 			}).end(d, d);
 		},
-		"Progress": function (a, d) {
+		"Stream": function (a, d) {
 			var events = [], reader;
-			reader = t(linter, path, { depth: Infinity, progress: true });
+			reader = t(linter, path, { depth: Infinity, stream: true });
 			reader.on('change', function (data) {
 				events.push(data);
 			});

@@ -32,7 +32,7 @@ var some      = require('es5-ext/lib/Object/some')
 			description: "Obey ignore rules up to given mode "
 				+ "(Currently just 'git' is supported)"
 		},
-		progress: {
+		stream: {
 			boolean: true,
 			default: true,
 			description: "Whether to generate reports on the go "
@@ -68,8 +68,8 @@ if (options.watch) {
 
 if (options.watch && (clc.width > 10) && (clc.height > 10)) {
 	reporter = require('../lib/reporters/console-watch');
-} else if (options.progress) {
-	reporter = require('../lib/reporters/console-progress');
+} else if (options.stream) {
+	reporter = require('../lib/reporters/console-stream');
 } else {
 	reporter = require('../lib/reporters/console');
 }

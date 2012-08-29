@@ -13,7 +13,7 @@ module.exports = function (t) {
 	return {
 		"Directory": function (a, d) {
 			var lint, events = [];
-			lint = t(linter, path, { depth: Infinity, progress: true, watch: true });
+			lint = t(linter, path, { depth: Infinity, stream: true, watch: true });
 			lint.on('change', function (data) {
 				events.push(data);
 			});
