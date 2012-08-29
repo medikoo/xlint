@@ -66,7 +66,8 @@ if (options.watch) {
 	setTimeout(function () { }, 1e9);
 }
 
-if (options.watch && (clc.width > 10) && (clc.height > 10)) {
+if (options.watch && (clc.width > 10) && (clc.height > 10) &&
+		(process.platform !== 'win32')) {
 	reporter = require('../lib/reporters/console-watch');
 } else if (options.stream) {
 	reporter = require('../lib/reporters/console-stream');
