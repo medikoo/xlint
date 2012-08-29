@@ -126,6 +126,7 @@ module.exports = function (t) {
 				var copy = [
 					{ type: 'remove', name: 'raz/dir2/raz/bar.js' }
 				];
+				normalize(events, copy);
 				a(isCopy(events, copy, Infinity), true, "Ignore revert change: Events");
 				watcher.close();
 				return deferred(writeFile(filePath, fileOrgSrc),
