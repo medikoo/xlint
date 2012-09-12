@@ -2,6 +2,8 @@
 
 'use strict';
 
+Error.stackTraceLimit = Infinity;
+
 var noop      = require('es5-ext/lib/Function/noop')
   , some      = require('es5-ext/lib/Object/some')
   , clc       = require('cli-color')
