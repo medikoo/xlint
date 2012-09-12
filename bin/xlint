@@ -2,7 +2,8 @@
 
 'use strict';
 
-var some      = require('es5-ext/lib/Object/some')
+var noop      = require('es5-ext/lib/Function/noop')
+  , some      = require('es5-ext/lib/Object/some')
   , clc       = require('cli-color')
   , lintPaths = require('../lib/lint-paths')
   , getLinter = require('../lib/_get-linter')
@@ -63,7 +64,7 @@ if (!paths.length) {
 
 if (options.watch) {
 	// Keep process persistent
-	setTimeout(function () { }, 1e9);
+	setTimeout(noop, 1e9);
 }
 
 if (options.watch && (clc.width > 10) && (clc.height > 10) &&
