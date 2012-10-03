@@ -59,8 +59,8 @@ map = {
 
 module.exports = exports = function (src, options) {
 	if (!map[src]) {
-		console.log(JSON.stringify(src));
-		throw new Error('No map defined for given source');
+		console.log("NO MAP!", JSON.stringify(src));
+		return [];
 	}
 	return map[src](options);
 };

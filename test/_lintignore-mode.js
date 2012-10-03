@@ -5,7 +5,7 @@ var deferred = require('deferred')
   , path     = resolve(__dirname, '__playground/_lintignore-mode')
 
 module.exports = function (t, a) {
-	var mode = require('next/lib/fs/_ignorefile-modes').lint;
+	var mode = require('next/lib/fs/_ignore-modes').lint;
 
 	a(mode.filename, '.lintignore', "Filename");
 	return {
@@ -18,9 +18,9 @@ module.exports = function (t, a) {
 		},
 		"Watch": function (a, d) {
 			var w1, w2;
-			deferred((w1 = mode.isRootWatch(resolve(path, 'foo')))(function (result) {
+			deferred((w1 = mode.isRootWatcher(resolve(path, 'foo')))(function (result) {
 				a(result, false);
-			}), (w2 = mode.isRootWatch(resolve(path)))(function (result) {
+			}), (w2 = mode.isRootWatcher(resolve(path)))(function (result) {
 				a(result, true);
 			}))(function () {
 				w1.close();

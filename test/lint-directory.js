@@ -50,7 +50,7 @@ module.exports = function (t) {
 					optsOrgSrc = String(data);
 					return writeFile(optsPath, optsOrgSrc.replace('foo, ', ''));
 				});
-			}, 100))(delay(function () {
+			}, DELAY))(delay(function () {
 				var copy = [
 					{ type: 'update', name: 'test.js', report: [
 						{ line: 3, character: 1,
@@ -84,7 +84,7 @@ module.exports = function (t) {
 					] }
 				];
 				normalize(events, copy);
-				a(isCopy(events, copy, Infinity), true, "Options change: Events");
+				a(isCopy(events, copy, Infinity), true, "JS file change: Events");
 				events = [];
 				return readFile(ignorePath)(function (data) {
 					ignoreOrgSrc = String(data);
