@@ -70,7 +70,7 @@ if (options.watch) {
 }
 
 // Prevent EMFILE errors
-require('next/lib/fs/descriptors-handler')();
+require('fs2/lib/descriptors-handler')();
 
 if (options.watch && (clc.width > 10) && (clc.height > 10) &&
 		(process.platform !== 'win32')) {

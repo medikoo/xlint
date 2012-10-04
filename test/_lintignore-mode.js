@@ -5,7 +5,7 @@ var deferred = require('deferred')
   , path     = resolve(__dirname, '__playground/_lintignore-mode')
 
 module.exports = function (t, a) {
-	var mode = require('next/lib/fs/_ignore-modes').lint;
+	var mode = require('fs2/lib/_ignore-modes').lint;
 
 	a(mode.filename, '.lintignore', "Filename");
 	return {
