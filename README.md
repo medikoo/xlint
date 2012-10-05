@@ -8,7 +8,7 @@
 * __Optional caching__ mechanism (no re-evaluation with same options on not modified files)
 * Provides __live console__, that updates when code or configuration files are updated
 * __Damn fast__
-* Covered by [__over 200 unit tests__](#tests-)
+* Covered by [__over 150 unit tests__](#tests-)
 
 ## Usage
 
