@@ -106,6 +106,7 @@ When we got that, we should just pass path to our module to xlint process
 ## TODO (v0.1.1 milestone)
 
 * Possibility to lint using more than one linter with one process
+* Git precommit hook
 * Provide simple plain text based read/write stream, so it can be easily plugged into external tools
 * Fix live console for Windows
 
