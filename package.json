@@ -14,13 +14,14 @@
     "url": "git://github.com/medikoo/xlint.git"
   },
   "keywords": [
-    "lint",
-    "jslint",
-    "jshint",
-    "linter",
-    "quality",
+    "cli",
     "code",
     "debugger",
+    "jslint",
+    "jshint",
+    "lint",
+    "linter",
+    "quality",
     "validation"
   ],
   "author": "Mariusz Nowak <medikoo+xlint@medikoo.com>",
