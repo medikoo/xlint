@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node node_modules/tad/bin/tad lib"
   },
+  "bin": {
+    "xlint": "./bin/xlint"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/medikoo/xlint.git"
