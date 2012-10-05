@@ -79,7 +79,7 @@ JSHint separates _global_ variable settings from other options, but in XLint con
 
 ## Support for other linters
 
-Internal architecture of XLint is well modularized. Other linters can be handled by XLint, by introdiif report procesor module that translates output report into XLint supported format is provided:
+Internal architecture of XLint is well modularized. Other linters can be handled by XLint, by introducing report procesor module that translates output report into XLint supported format:
 
 ```javascript
 // Custom linter handler
