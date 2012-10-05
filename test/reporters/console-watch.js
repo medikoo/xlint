@@ -12,6 +12,6 @@ module.exports = function (t, a, d) {
 		invoked = true;
 	} }).end();
 	promise.emit('change', { type: 'add', name: 'foo', report: report });
-	a(invoked, true);
+	a(invoked, true, "Invoked");
 	process.nextTick(d);
 };
