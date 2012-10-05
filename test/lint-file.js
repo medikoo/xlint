@@ -1,15 +1,14 @@
 'use strict';
 
-var deferred  = require('deferred')
-  , delay     = deferred.delay
-  , promisify = deferred.promisify
-  , isBuffer  = Buffer.isBuffer
-  , fs        = require('fs')
-  , resolve   = require('path').resolve
-  , readFile  = promisify(fs.readFile)
-  , writeFile = promisify(fs.writeFile)
-  , unlink    = promisify(fs.unlink)
-  , linter    = require('./__linter')
+var deferred = require('deferred')
+  , fs       = require('fs')
+  , resolve  = require('path').resolve
+  , linter   = require('./__linter')
+
+  , delay = deferred.delay, promisify = deferred.promisify
+  , isBuffer = Buffer.isBuffer
+  , readFile = promisify(fs.readFile), writeFile = promisify(fs.writeFile)
+  , unlink = promisify(fs.unlink)
 
   , path = resolve(__dirname, '__playground/lint-file/raz/dwa/test.js')
   , optsPath = resolve(__dirname, '__playground/lint-file/.lint')

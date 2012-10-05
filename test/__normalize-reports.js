@@ -1,12 +1,12 @@
 'use strict';
 
-var isArray = Array.isArray
-  , curry   = require('es5-ext/lib/Function/prototype/curry')
+var curry   = require('es5-ext/lib/Function/prototype/curry')
   , clear   = require('es5-ext/lib/Object/clear')
   , extend  = require('es5-ext/lib/Object/extend')
   , forEach = require('es5-ext/lib/Object/for-each')
   , mapKeys = require('es5-ext/lib/Object/map-keys')
 
+  , isArray = Array.isArray
   , join = curry.call(require('path').join, 1);
 
 module.exports = function (data, copy) {

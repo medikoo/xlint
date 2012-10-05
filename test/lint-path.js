@@ -1,10 +1,10 @@
 'use strict';
 
-var isCopy       = require('es5-ext/lib/Object/is-copy')
-  , resolve      = require('path').resolve
-  , inspect      = require('util').inspect
+var isCopy    = require('es5-ext/lib/Object/is-copy')
+  , resolve   = require('path').resolve
+  , inspect   = require('util').inspect
   , normalize = require('./__normalize-reports')
-  , linter       = require('./__linter')
+  , linter    = require('./__linter')
 
   , path = resolve(__dirname, '__playground/lint-path')
   , filePath = resolve(path, 'raz/dwa/other-test.js');

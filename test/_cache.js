@@ -1,11 +1,10 @@
 'use strict';
 
 var deferred  = require('deferred')
-  , delay     = deferred.delay
-  , promisify = deferred.promisify
-  , fs        = require('fs')
   , resolve   = require('path').resolve
-  , unlink    = promisify(fs.unlink)
+
+  , delay = deferred.delay, promisify = deferred.promisify
+  , unlink = promisify(require('fs').unlink)
 
   , cachePath = resolve(__dirname, '__playground/_cache/.lintcache')
   , path = resolve(__dirname, '__playground/_cache/test.js');
