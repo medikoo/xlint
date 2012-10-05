@@ -101,7 +101,7 @@ module.exports = function (src, options) {
 };
 ```
 
-When we got that, we should just pass path to our module to xlint process
+When we got that, we can use our module as one of the linters supported by XLint.
 
 ## TODO (v0.1.1 milestone)
 
