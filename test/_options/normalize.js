@@ -1,7 +1,7 @@
 'use strict';
 
-var isCopy  = require('es5-ext/lib/Object/is-copy')
-  , inspect = require('util').inspect;
+var isCopy  = require('es5-ext/lib/Object/is-copy');
+//   , inspect = require('util').inspect;
 
 module.exports = function (t, a) {
 	var x = { foo: true }, copy;

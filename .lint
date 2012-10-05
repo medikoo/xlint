@@ -11,7 +11,6 @@ jslint_medikoo.plusplus
 
 jshint.laxcomma
 jshint.camelcase
-jshint.curly
 jshint.eqeqeq
 jshint.forin
 jshint.immed
@@ -32,3 +31,4 @@ jshint.eqnull
 jshint.expr
 
 jslint_medikoo.predef console, process, setTimeout, Buffer, __dirname
+jshint.global+ console, process, setTimeout, Buffer, __dirname

@@ -4,12 +4,11 @@ var isCopy    = require('es5-ext/lib/Object/is-copy')
   , deferred  = require('deferred')
   , fs        = require('fs')
   , resolve   = require('path').resolve
-  , inspect   = require('util').inspect
+//  , inspect   = require('util').inspect
   , normalize = require('./__normalize-reports')
   , linter    = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
-  , isBuffer = Buffer.isBuffer
   , readFile = promisify(fs.readFile), writeFile = promisify(fs.writeFile)
   , unlink = promisify(fs.unlink)
 

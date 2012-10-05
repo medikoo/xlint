@@ -2,7 +2,7 @@
 
 var isCopy    = require('es5-ext/lib/Object/is-copy')
   , resolve   = require('path').resolve
-  , inspect   = require('util').inspect
+//  , inspect   = require('util').inspect
   , normalize = require('./__normalize-reports')
   , linter    = require('./__linter')
 

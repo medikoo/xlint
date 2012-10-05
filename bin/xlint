@@ -32,14 +32,14 @@ var noop      = require('es5-ext/lib/Function/noop')
 		},
 		ignoreRules: {
 			default: 'git',
-			description: "Obey ignore rules up to given mode "
-				+ "(Currently just 'git' is supported)"
+			description: "Obey ignore rules up to given mode " +
+				"(Currently just 'git' is supported)"
 		},
 		stream: {
 			boolean: true,
 			default: true,
-			description: "Whether to generate reports on the go "
-				+ "(while file system is scanned)"
+			description: "Whether to generate reports on the go " +
+				"(while file system is scanned)"
 		},
 		watch: {
 			boolean: true,

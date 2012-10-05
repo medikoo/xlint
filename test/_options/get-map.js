@@ -2,7 +2,7 @@
 
 var isCopy  = require('es5-ext/lib/Object/is-copy')
   , resolve = require('path').resolve
-  , inspect = require('util').inspect
+//   , inspect = require('util').inspect
 
   , path = resolve(__dirname, '../__playground/get-map');
 

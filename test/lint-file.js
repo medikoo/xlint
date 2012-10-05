@@ -6,7 +6,6 @@ var deferred = require('deferred')
   , linter   = require('./__linter')
 
   , delay = deferred.delay, promisify = deferred.promisify
-  , isBuffer = Buffer.isBuffer
   , readFile = promisify(fs.readFile), writeFile = promisify(fs.writeFile)
   , unlink = promisify(fs.unlink)
 
