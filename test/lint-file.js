@@ -13,7 +13,7 @@ var deferred  = require('deferred')
 
   , path = resolve(__dirname, '__playground/lint-file/raz/dwa/test.js')
   , optsPath = resolve(__dirname, '__playground/lint-file/.lint')
-  , cachePath = resolve(__dirname, '__playground/lint-file/.lintcache')
+  , cachePath = resolve(__dirname, '__playground/lint-file/.lintcache');
 
 module.exports = function (t) {
 	return {

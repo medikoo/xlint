@@ -17,7 +17,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , filePath = resolve(path, 'dwa/footka.js')
   , optsPath = resolve(path, 'dir1/.lint')
   , ignorePath = resolve(path, 'raz/dir2/.lintignore')
-  , cachePath = resolve(path, '.lintcache')
+  , cachePath = resolve(path, '.lintcache');
 
 module.exports = function (t) {
 	var paths = [
@@ -166,10 +166,12 @@ module.exports = function (t) {
 				// console.log("DATA", inspect(report, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a(isCopy(report, copy, Infinity), true, "Report");
-				return t(linter, paths, { cache: true, depth: Infinity })(function (r2) {
-					a.deep(r2, report, "Taken from cache");
-					return unlink(cachePath);
-				});
+				return t(linter, paths, { cache: true, depth: Infinity })(
+					function (r2) {
+						a.deep(r2, report, "Taken from cache");
+						return unlink(cachePath);
+					}
+				);
 			}).end(d, d);
 		},
 		"Stream": function (a, d) {
@@ -249,4 +251,3 @@ module.exports = function (t) {
 		}
 	};
 };
-

@@ -19,7 +19,7 @@ var isCopy    = require('es5-ext/lib/Object/is-copy')
   , filePath = resolve(path, 'raz/dwa/other-test.js')
   , optsPath = resolve(path, '.lint')
   , ignorePath = resolve(path, '.lintignore')
-  , cachePath = resolve(path, '.lintcache')
+  , cachePath = resolve(path, '.lintcache');
 
 module.exports = function (t) {
 	return {
@@ -120,29 +120,31 @@ module.exports = function (t) {
 			}, DELAY)).end(d, d);
 		},
 		"Cache": function (a, d) {
-			t(linter, [file1Path, file2Path, filePath], { cache: true })(function (report) {
-				var copy = {
-					'test.js': [
-						{ line: 5, character: 1,
-							message: '\'fooelse\' was used before it was defined.' }
-					],
-					'raz/dwa/other-test.js': [
-						{ line: 2, character: 11,
-							message: 'Unexpected \'&\'.' },
-						{ line: 4, character: 1,
-							message: '\'zoom\' was used before it was defined.' }
-					]
-				};
-				normalize(report, copy);
-				// console.log("DATA", inspect(report, false, Infinity));
-				// console.log("COPY", inspect(copy, false, Infinity));
-				a(isCopy(report, copy, Infinity), true, "Report");
-				return t(linter, [file1Path, file2Path, filePath],
-					{ cache: true })(function (r2) {
+			t(linter, [file1Path, file2Path, filePath], { cache: true })(
+				function (report) {
+					var copy = {
+						'test.js': [
+							{ line: 5, character: 1,
+								message: '\'fooelse\' was used before it was defined.' }
+						],
+						'raz/dwa/other-test.js': [
+							{ line: 2, character: 11,
+								message: 'Unexpected \'&\'.' },
+							{ line: 4, character: 1,
+								message: '\'zoom\' was used before it was defined.' }
+						]
+					};
+					normalize(report, copy);
+					// console.log("DATA", inspect(report, false, Infinity));
+					// console.log("COPY", inspect(copy, false, Infinity));
+					a(isCopy(report, copy, Infinity), true, "Report");
+					return t(linter, [file1Path, file2Path, filePath],
+						{ cache: true })(function (r2) {
 						a.deep(r2, report, "Taken from cache");
 						return unlink(cachePath);
 					});
-			}).end(d, d);
+				}
+			).end(d, d);
 		}
 	};
 };

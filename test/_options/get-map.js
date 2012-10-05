@@ -4,7 +4,7 @@ var isCopy  = require('es5-ext/lib/Object/is-copy')
   , resolve = require('path').resolve
   , inspect = require('util').inspect
 
-  , path = resolve(__dirname, '../__playground/get-map')
+  , path = resolve(__dirname, '../__playground/get-map');
 
 module.exports = function (t, a, d) {
 	var path2 = resolve(path, './foo/bar'), watcher;

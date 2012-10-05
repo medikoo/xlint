@@ -17,7 +17,7 @@ var isCopy    = require('es5-ext/lib/Object/is-copy')
   , filePath = resolve(path, 'raz/dwa/other-test.js')
   , optsPath = resolve(path, '.lint')
   , ignorePath = resolve(path, '.lintignore')
-  , cachePath = resolve(path, '.lintcache')
+  , cachePath = resolve(path, '.lintcache');
 
 module.exports = function (t) {
 	return {

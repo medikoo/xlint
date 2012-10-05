@@ -8,7 +8,7 @@ module.exports = function (t, a) {
 
 	a.not(t(x), x, "Return copy");
 	x = t({ foo: false, bar: {}, raz: ['raz', 3, {}, 'dwa'] });
-	copy = { foo: false, raz: ['raz', '3', '[object Object]', 'dwa']};
+	copy = { foo: false, raz: ['raz', '3', '[object Object]', 'dwa'] };
 
 	// console.log("OPTS", inspect(x, false, Infinity));
 	// console.log("COPY", inspect(copy, false, Infinity));

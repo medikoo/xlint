@@ -7,7 +7,7 @@ var isCopy       = require('es5-ext/lib/Object/is-copy')
   , linter       = require('./__linter')
 
   , path = resolve(__dirname, '__playground/lint-path')
-  , filePath = resolve(path, 'raz/dwa/other-test.js')
+  , filePath = resolve(path, 'raz/dwa/other-test.js');
 
 module.exports = function (t) {
 	return {
@@ -54,8 +54,8 @@ module.exports = function (t) {
 			}).end(d, d);
 		},
 		"File": function (a, d) {
-			var lint;
-			(lint = t(linter, filePath, { watch: true }))(function (data) {
+			var lint = t(linter, filePath, { watch: true });
+			lint(function (data) {
 				var copy = { ".": [
 					{ line: 2, character: 11,
 						message: 'Unexpected \'&\'.' },
