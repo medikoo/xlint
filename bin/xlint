@@ -4,6 +4,9 @@
 
 Error.stackTraceLimit = Infinity;
 
+// Prevent EMFILE errors
+require('fs2/lib/descriptors-handler')();
+
 var noop      = require('es5-ext/lib/Function/noop')
   , some      = require('es5-ext/lib/Object/some')
   , clc       = require('cli-color')
@@ -68,9 +71,6 @@ if (options.watch) {
 	// Keep process persistent
 	setTimeout(noop, 1e9);
 }
-
-// Prevent EMFILE errors
-require('fs2/lib/descriptors-handler')();
 
 if (options.watch && (clc.width > 10) && (clc.height > 10) &&
 		(process.platform !== 'win32')) {
