@@ -29,6 +29,9 @@ var noop      = require('es5-ext/lib/Function/noop')
 			default: Infinity,
 			description: "How deeply to recurse into directories (default: Infinity)"
 		},
+		linter: {
+			description: "Linter path"
+		},
 		help: {
 			boolean: true,
 			desription: "Show this help"
@@ -52,24 +55,24 @@ var noop      = require('es5-ext/lib/Function/noop')
 			boolean: true,
 			description: "Live console mode, updated on file and settings changes"
 		}
-	}).demand(1)
+	})
   , options = optimist.argv
-  , linter, paths, reporter;
+  , linters, paths, reporter;
 
 if (options.help) {
 	console.log(optimist.help());
 	process.exit(0);
 }
 
-linter = getLinter(options._[0]);
-paths = options._.slice(1);
+linters = Array.isArray(options.linter) ? options.linter.map(getLinter) :
+		[getLinter(options.linter)];
+
+paths = options._;
 
 delete options._;
 delete options.$0;
 
-if (!paths.length) {
-	paths.push('.');
-}
+if (!paths.length) paths.push('.');
 
 if (options.terse) {
 	options.stream = false;
@@ -92,7 +95,11 @@ if (options.watch && (clc.width > 10) && (clc.height > 10) &&
 	reporter = require('../lib/reporters/console');
 }
 
-reporter = reporter(lintPaths(linter, paths, options), options);
+linters = linters.map(function (linter) {
+	return lintPaths(linter, paths, options);
+});
+
+reporter = reporter(linters, options);
 reporter.end();
 process.on('exit', function () {
 	reporter.end(function (data) {
