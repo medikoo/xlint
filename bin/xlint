@@ -44,6 +44,10 @@ var noop      = require('es5-ext/lib/Function/noop')
 			description: "Whether to generate reports on the go " +
 				"(while file system is scanned)"
 		},
+		terse: {
+			boolean: true,
+			description: "Program parsable output"
+		},
 		watch: {
 			boolean: true,
 			description: "Live console mode, updated on file and settings changes"
@@ -67,6 +71,11 @@ if (!paths.length) {
 	paths.push('.');
 }
 
+if (options.terse) {
+	options.stream = false;
+	options.watch = false;
+	options.color = false;
+}
 if (options.watch) {
 	// Keep process persistent
 	setTimeout(noop, 1e9);
@@ -77,6 +86,8 @@ if (options.watch && (clc.width > 10) && (clc.height > 10) &&
 	reporter = require('../lib/reporters/console-watch');
 } else if (options.stream) {
 	reporter = require('../lib/reporters/console-stream');
+} else if (options.terse) {
+	reporter = require('../lib/reporters/console-terse');
 } else {
 	reporter = require('../lib/reporters/console');
 }
