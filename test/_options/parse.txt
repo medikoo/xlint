@@ -15,6 +15,7 @@ cap
 predef+ foo,bar #comment
 
 ./marko-zagalo.js
+./testo-fanfaro.js
 predef- morda, mala
 
 ./

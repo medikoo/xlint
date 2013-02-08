@@ -36,6 +36,9 @@ module.exports = function (t, a, d) {
 		copy[resolve('/one/two/marko-zagalo.js')] = {
 			predef: mod2
 		};
+		copy[resolve('/one/two/testo-fanfaro.js')] = {
+			predef: mod2
+		};
 
 		// console.log("DATA", inspect(result, false, Infinity));
 		// console.log("COPY", inspect(copy, false, Infinity));
