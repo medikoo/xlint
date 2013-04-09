@@ -15,7 +15,7 @@ var noop      = require('es5-ext/lib/Function/noop')
   , getLinter = require('../lib/_get-linter')
 
   , optimist = require('optimist')
-	.usage("usage: $0 [options] <linter> [<paths>]", {
+	.usage("usage: $0 [options] [<paths>]", {
 		cache: {
 			boolean: true,
 			default: true,
@@ -31,7 +31,7 @@ var noop      = require('es5-ext/lib/Function/noop')
 			description: "How deeply to recurse into directories (default: Infinity)"
 		},
 		linter: {
-			description: "Linter path"
+			description: "[Mandatory] Linter path"
 		},
 		realFilename: {
 			description: "Real filename of resource"
