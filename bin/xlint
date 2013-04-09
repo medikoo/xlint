@@ -63,7 +63,7 @@ var noop      = require('es5-ext/lib/Function/noop')
   , options = optimist.argv
   , linters, paths, reporter;
 
-if (options.help) {
+if (options.help || !options.linter) {
 	console.log(optimist.help());
 	process.exit(0);
 }
