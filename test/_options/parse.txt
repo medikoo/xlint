@@ -19,6 +19,7 @@ predef+ foo,bar #comment
 predef- morda, mala
 
 ./
+./morda
 # comment
 devel
 !adsafe

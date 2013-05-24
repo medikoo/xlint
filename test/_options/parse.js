@@ -9,7 +9,7 @@ var isCopy   = require('es5-ext/lib/Object/is-copy')
 
 module.exports = function (t, a, d) {
 	readFile(testFile, function (err, data) {
-		var result, mod1, mod2, copy;
+		var result, mod1, mod2, mod3, copy;
 		if (err) {
 			d(err);
 			return;
@@ -17,7 +17,8 @@ module.exports = function (t, a, d) {
 		result = t(data, resolve('/one/two'));
 		mod1 = [{ action: 'add', value: ['bar', 'foo'] }];
 		mod2 = [{ action: 'remove', value: ['mala', 'morda'] }];
-		mod1.mod = mod2.mod = true;
+		mod3 = [{ action: 'remove', value: ['raz', 'dwa', 'one'].sort() }];
+		mod1.mod = mod2.mod = mod3.mod = true;
 
 		copy = { root: true };
 		copy[resolve('/one/two')] = {
@@ -27,6 +28,12 @@ module.exports = function (t, a, d) {
 			debug: false,
 			predef: ['two'],
 			eqeq: true
+		};
+		copy[resolve('/one/two/morda')] = {
+			adsafe: false,
+			devel: true,
+			eqeq: true,
+			predef: mod3
 		};
 		copy[resolve('/one/two/foo/bar')] = {
 			browser: false,
@@ -40,8 +47,8 @@ module.exports = function (t, a, d) {
 			predef: mod2
 		};
 
-		// console.log("DATA", inspect(result, false, Infinity));
-		// console.log("COPY", inspect(copy, false, Infinity));
+		// console.log("GOT", inspect(result, false, Infinity));
+		// console.log("EXPECTED", inspect(copy, false, Infinity));
 		a(isCopy(result, copy, Infinity), true);
 		d();
 	});
