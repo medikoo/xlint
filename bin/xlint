@@ -108,7 +108,8 @@ linters = linters.map(function (linter) {
 
 reporter = reporter(linters, options);
 reporter.end();
-process.on('exit', function () {
+process.on('exit', function (code) {
+	if (code) return;
 	reporter.end(function (data) {
 		process.exit(some(data, function (report) {
 			return report.length;
