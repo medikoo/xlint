@@ -13,6 +13,7 @@ var noop      = require('es5-ext/lib/Function/noop')
   , resolve   = require('path').resolve
   , lintPaths = require('../lib/lint-paths')
   , getLinter = require('../lib/_get-linter')
+  , unify     = require('../lib/_unify-reports')
 
   , optimist = require('optimist')
 	.usage("usage: $0 [options] [<paths>]", {
@@ -102,9 +103,9 @@ if (options.watch && (clc.width > 10) && (clc.height > 10)) {
 	reporter = require('../lib/reporters/console');
 }
 
-linters = linters.map(function (linter) {
+linters = unify(linters.map(function (linter) {
 	return lintPaths(linter, paths, options);
-});
+}), options);
 
 reporter = reporter(linters, options);
 reporter.end();
