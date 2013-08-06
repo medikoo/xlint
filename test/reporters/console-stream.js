@@ -3,7 +3,8 @@
 var deferred = require('deferred');
 
 module.exports = function (t, a, d) {
-	var report = [{ message: 'Lorem ipsum', at: 1, line: 1 }], invoked, promise;
+	var report = [{ message: 'Lorem ipsum', character: 1, line: 1 }], invoked
+	  , promise;
 	report.src = 'Lorem ipsum';
 	report.options = {};
 	promise = deferred({ 'foo': report });

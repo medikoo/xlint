@@ -4,23 +4,23 @@ var deferred = require('deferred');
 
 module.exports = function (t, a) {
 	var r11, r12, r13, r21, r22, r1, r2, r, e, event, result, result2;
-	r11 = [{ message: 'Report 11', line: 1, at: 1 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 13', line: 2, at: 3 }];
+	r11 = [{ message: 'Report 11', line: 1, character: 1 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 13', line: 2, character: 3 }];
 	r11.src = 'File 1';
 	r11.path = '/File 1';
 	r11.options = { raz: true, dwa: ['raz'] };
 
-	r21 = [{ message: 'Report 21', line: 1, at: 2 },
-		{ message: 'Report 22', line: 1, at: 3 },
-		{ message: 'Report 23', line: 3, at: 3 }];
+	r21 = [{ message: 'Report 21', line: 1, character: 2 },
+		{ message: 'Report 22', line: 1, character: 3 },
+		{ message: 'Report 23', line: 3, character: 3 }];
 	r21.src = 'File 1';
 	r21.path = '/File 1';
 	r21.options = { trzy: true, dwa: ['raz'] };
 
-	r22 = [{ message: 'File other', line: 1, at: 2 },
-		{ message: 'Report 22', line: 1, at: 3 },
-		{ message: 'Report 23', line: 3, at: 3 }];
+	r22 = [{ message: 'File other', line: 1, character: 2 },
+		{ message: 'Report 22', line: 1, character: 3 },
+		{ message: 'Report 23', line: 3, character: 3 }];
 	r22.src = 'File 2';
 	r22.path = '/File 2';
 	r22.options = { trzy: true, dwa: ['raz'] };
@@ -31,11 +31,11 @@ module.exports = function (t, a) {
 	r2.xlintId = 'SECOND';
 
 	r = t([r1, r2], { watch: true });
-	result = [{ message: 'Report 11', line: 1, at: 1 },
-		{ message: 'Report 21', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 13', line: 2, at: 3 },
-		{ message: 'Report 23', line: 3, at: 3 }];
+	result = [{ message: 'Report 11', line: 1, character: 1 },
+		{ message: 'Report 21', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 13', line: 2, character: 3 },
+		{ message: 'Report 23', line: 3, character: 3 }];
 	r.done(function (r) {
 		a.deep(Object.keys(r).sort(), ['file1', 'file2'], "Report #1 names");
 		a(r.file1.length, result.length, "Report #1 length");
@@ -54,10 +54,10 @@ module.exports = function (t, a) {
 	r11.pop();
 	r1.emit('change', { name: 'file1', type: 'update',
 		report: r11 });
-	result = [{ message: 'Report 11', line: 1, at: 1 },
-		{ message: 'Report 21', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 23', line: 3, at: 3 }];
+	result = [{ message: 'Report 11', line: 1, character: 1 },
+		{ message: 'Report 21', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 23', line: 3, character: 3 }];
 	a(e.name, 'file1', "Remove error: Event: name");
 	a(e.type, 'update', "Remove error: Event: update");
 	a(e.report.length, result.length, "Remove error: Event: Report length");
@@ -79,14 +79,14 @@ module.exports = function (t, a) {
 		a(r.file2, r.file2, "Remove error: Report #2");
 	});
 
-	r21[1].at = 4;
+	r21[1].character = 4;
 	r2.emit('change', { name: 'file1', type: 'update',
 		report: r21 });
-	result = [{ message: 'Report 11', line: 1, at: 1 },
-		{ message: 'Report 21', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 22', line: 1, at: 4 },
-		{ message: 'Report 23', line: 3, at: 3 }];
+	result = [{ message: 'Report 11', line: 1, character: 1 },
+		{ message: 'Report 21', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 22', line: 1, character: 4 },
+		{ message: 'Report 23', line: 3, character: 3 }];
 	a(e.name, 'file1', "Misalign error: Event: name");
 	a(e.type, 'update', "Misalign error: Event: update");
 	a(e.report.length, result.length, "Misalign error: Event: Report length");
@@ -108,18 +108,18 @@ module.exports = function (t, a) {
 		a(r.file2, r.file2, "Misalign error: Report #2");
 	});
 
-	r12 = [{ message: 'File other2', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 13', line: 5, at: 3 }];
+	r12 = [{ message: 'File other2', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 13', line: 5, character: 3 }];
 	r12.src = 'File 2';
 	r12.path = '/File 2';
 	r12.options = { foo: true, dwa: ['raz'] };
 	r1.emit('change', { name: 'file2', type: 'add',
 		report: r12 });
-	result2 = [{ message: 'File other2', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 23', line: 3, at: 3 },
-		{ message: 'Report 13', line: 5, at: 3 }];
+	result2 = [{ message: 'File other2', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 23', line: 3, character: 3 },
+		{ message: 'Report 13', line: 5, character: 3 }];
 	a(e.name, 'file2', "Add existing: Event: name");
 	a(e.type, 'update', "Add existing: Event: update");
 	a(e.report.length, result2.length, "Add existing: Event: Report length");
@@ -148,9 +148,9 @@ module.exports = function (t, a) {
 		});
 	});
 
-	r13 = [{ message: 'Another', line: 1, at: 2 },
-		{ message: 'Report 12', line: 1, at: 3 },
-		{ message: 'Report 13', line: 5, at: 3 }];
+	r13 = [{ message: 'Another', line: 1, character: 2 },
+		{ message: 'Report 12', line: 1, character: 3 },
+		{ message: 'Report 13', line: 5, character: 3 }];
 	r13.src = 'File 3';
 	r13.path = '/File 3';
 	r13.options = { bar: true, dwa: ['raz'] };
