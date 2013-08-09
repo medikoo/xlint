@@ -52,6 +52,12 @@ var noop      = require('es5-ext/lib/Function/noop')
 			description: "Whether to generate reports on the go " +
 				"(while file system is scanned)"
 		},
+		logView: {
+			boolean: true,
+			description: "In case of watch or stream option it displays reports in" +
+				" log form (no outputed lines are edited or removed). Suitable for" +
+				" terminals that doesn't support control characters"
+		},
 		gjs: {
 			boolean: true,
 			description: "Google Closure Linter output style"
@@ -97,7 +103,9 @@ if (options.realFilename) {
 	console.log(options.realFilename = resolve(options.realFilename));
 }
 
-if (options.watch && (clc.width > 10) && (clc.height > 10)) {
+if ((options.watch || options.stream) && options.logView) {
+	reporter = require('../lib/reporters/console-log-stream');
+} else if (options.watch && (clc.width > 10) && (clc.height > 10)) {
 	reporter = require('../lib/reporters/console-watch');
 } else if (options.stream) {
 	reporter = require('../lib/reporters/console-stream');
