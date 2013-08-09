@@ -52,6 +52,10 @@ var noop      = require('es5-ext/lib/Function/noop')
 			description: "Whether to generate reports on the go " +
 				"(while file system is scanned)"
 		},
+		gjs: {
+			boolean: true,
+			description: "Google Closure Linter output style"
+		},
 		terse: {
 			boolean: true,
 			description: "Program parsable output"
@@ -79,7 +83,7 @@ delete options.$0;
 
 if (!paths.length) paths.push('.');
 
-if (options.terse) {
+if (options.terse || options.gjs) {
 	options.stream = false;
 	options.watch = false;
 	options.color = false;
@@ -99,6 +103,8 @@ if (options.watch && (clc.width > 10) && (clc.height > 10)) {
 	reporter = require('../lib/reporters/console-stream');
 } else if (options.terse) {
 	reporter = require('../lib/reporters/console-terse');
+} else if (options.gjs) {
+	reporter = require('../lib/reporters/console-gjs');
 } else {
 	reporter = require('../lib/reporters/console');
 }
