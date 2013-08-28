@@ -1,10 +1,10 @@
 'use strict';
 
-var curry   = require('es5-ext/lib/Function/prototype/curry')
-  , clear   = require('es5-ext/lib/Object/clear')
-  , extend  = require('es5-ext/lib/Object/extend')
-  , forEach = require('es5-ext/lib/Object/for-each')
-  , mapKeys = require('es5-ext/lib/Object/map-keys')
+var curry   = require('es5-ext/function/#/curry')
+  , clear   = require('es5-ext/object/clear')
+  , extend  = require('es5-ext/object/extend')
+  , forEach = require('es5-ext/object/for-each')
+  , mapKeys = require('es5-ext/object/map-keys')
 
   , isArray = Array.isArray
   , join = curry.call(require('path').join, 1);

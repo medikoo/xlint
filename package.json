@@ -32,7 +32,7 @@
   "dependencies": {
     "cli-color": "0.2.x",
     "deferred": "0.6.x",
-    "es5-ext": "0.9.x",
+    "es5-ext": "git://github.com/medikoo/es5-ext.git",
     "fs2": "0.1.x",
     "event-emitter": "0.2.x",
     "memoizee": "git://github.com/medikoo/memoize.git",

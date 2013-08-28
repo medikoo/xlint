@@ -1,6 +1,6 @@
 'use strict';
 
-var isCopy   = require('es5-ext/lib/Object/is-copy')
+var isCopy   = require('es5-ext/object/is-copy')
   , resolve  = require('path').resolve
   , readFile = require('fs').readFile
 //  , inspect  = require('util').inspect

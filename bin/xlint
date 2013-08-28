@@ -7,8 +7,8 @@ Error.stackTraceLimit = Infinity;
 // Prevent EMFILE errors
 require('fs2/lib/descriptors-handler')();
 
-var noop      = require('es5-ext/lib/Function/noop')
-  , some      = require('es5-ext/lib/Object/some')
+var noop      = require('es5-ext/function/noop')
+  , some      = require('es5-ext/object/some')
   , clc       = require('cli-color')
   , resolve   = require('path').resolve
   , lintPaths = require('../lib/lint-paths')
