@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "cli-color": "0.2.x",
+    "d": "git://github.com/medikoo/d.git",
     "deferred": "0.6.x",
     "es5-ext": "git://github.com/medikoo/es5-ext.git",
     "fs2": "0.1.x",
