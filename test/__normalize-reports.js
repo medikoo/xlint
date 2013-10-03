@@ -1,8 +1,8 @@
 'use strict';
 
 var curry   = require('es5-ext/function/#/curry')
+  , assign  = require('es5-ext/object/assign')
   , clear   = require('es5-ext/object/clear')
-  , extend  = require('es5-ext/object/extend')
   , forEach = require('es5-ext/object/for-each')
   , mapKeys = require('es5-ext/object/map-keys')
 
@@ -29,6 +29,6 @@ module.exports = function (data, copy) {
 			delete value.path;
 		});
 		ncopy = mapKeys(copy, join);
-		extend(clear(copy), ncopy);
+		assign(clear(copy), ncopy);
 	}
 };
