@@ -1,7 +1,6 @@
 'use strict';
 
-var isCopy  = require('es5-ext/object/is-copy');
-//   , inspect = require('util').inspect;
+// var inspect = require('util').inspect;
 
 module.exports = function (t, a) {
 	var x = { foo: true }, copy;
@@ -12,5 +11,5 @@ module.exports = function (t, a) {
 
 	// console.log("OPTS", inspect(x, false, Infinity));
 	// console.log("COPY", inspect(copy, false, Infinity));
-	a(isCopy(x, copy, Infinity), true);
+	a.deep(x, copy);
 };

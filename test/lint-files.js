@@ -1,7 +1,6 @@
 'use strict';
 
-var isCopy    = require('es5-ext/object/is-copy')
-  , deferred  = require('deferred')
+var deferred  = require('deferred')
   , fs        = require('fs')
   , resolve   = require('path').resolve
 //   , inspect   = require('util').inspect
@@ -46,7 +45,7 @@ module.exports = function (t) {
 				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				a(isCopy(data, copy, Infinity), true, "Report");
+				a.deep(data, copy, "Report");
 				return readFile(optsPath)(function (data) {
 					optsOrgSrc = String(data);
 					return writeFile(optsPath, optsOrgSrc.replace('foo, ', ''));
@@ -69,7 +68,7 @@ module.exports = function (t) {
 					] }
 				];
 				normalize(events, copy);
-				a(isCopy(events, copy, Infinity), true, "Options change: Events");
+				a.deep(events, copy, "Options change: Events");
 				events = [];
 				return readFile(filePath)(function (data) {
 					fileOrgSrc = String(data);
@@ -85,7 +84,7 @@ module.exports = function (t) {
 					] }
 				];
 				normalize(events, copy);
-				a(isCopy(events, copy, Infinity), true, "Options change: Events");
+				a.deep(events, copy, "Options change: Events");
 				events = [];
 				return readFile(ignorePath)(function (data) {
 					ignoreOrgSrc = String(data);
@@ -103,7 +102,7 @@ module.exports = function (t) {
 				normalize(events, copy);
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				a(isCopy(events, copy, Infinity), true, "Ignore change: Events");
+				a.deep(events, copy, "Ignore change: Events");
 				events = [];
 				return writeFile(ignorePath, ignoreOrgSrc);
 			}, DELAY))(delay(function () {
@@ -111,7 +110,7 @@ module.exports = function (t) {
 					{ type: 'remove', name: 'raz/bar.js' }
 				];
 				normalize(events, copy);
-				a(isCopy(events, copy, Infinity), true, "Ignore revert change: Events");
+				a.deep(events, copy, "Ignore revert change: Events");
 				watcher.close();
 				return deferred(writeFile(filePath, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc),
@@ -136,7 +135,7 @@ module.exports = function (t) {
 					normalize(report, copy);
 					// console.log("DATA", inspect(report, false, Infinity));
 					// console.log("COPY", inspect(copy, false, Infinity));
-					a(isCopy(report, copy, Infinity), true, "Report");
+					a.deep(report, copy, "Report");
 					return t(linter, [file1Path, file2Path, filePath],
 						{ cache: true })(function (r2) {
 						a.deep(r2, report, "Taken from cache");

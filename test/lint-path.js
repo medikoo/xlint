@@ -1,7 +1,6 @@
 'use strict';
 
-var isCopy    = require('es5-ext/object/is-copy')
-  , resolve   = require('path').resolve
+var resolve   = require('path').resolve
 //  , inspect   = require('util').inspect
   , normalize = require('./__normalize-reports')
   , linter    = require('./__linter')
@@ -33,7 +32,7 @@ module.exports = function (t) {
 				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				a(isCopy(data, copy, Infinity), true, "Report");
+				a.deep(data, copy, "Report");
 
 				copy = [
 					{ type: 'add', name: 'test.js', report: [
@@ -48,7 +47,7 @@ module.exports = function (t) {
 					] }
 				];
 				normalize(events, copy);
-				a(isCopy(events, copy, Infinity), true, "Events");
+				a.deep(events, copy, "Events");
 
 				lint.close();
 			}).end(d, d);
@@ -65,7 +64,7 @@ module.exports = function (t) {
 				normalize(data, copy);
 				// console.log("DATA", inspect(data, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
-				a(isCopy(data, copy, Infinity), true);
+				a.deep(data, copy);
 				lint.close();
 			}).end(d, d);
 		}

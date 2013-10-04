@@ -1,7 +1,6 @@
 'use strict';
 
-var isCopy  = require('es5-ext/object/is-copy')
-  , resolve = require('path').resolve
+var resolve = require('path').resolve
 //   , inspect = require('util').inspect
 
   , path = resolve(__dirname, '../__playground/get-map');
@@ -45,7 +44,7 @@ module.exports = function (t, a, d) {
 
 		// console.log("DATA", inspect(data, false, Infinity));
 		// console.log("COPY", inspect(copy, false, Infinity));
-		a(isCopy(data, copy, Infinity), true);
+		a.deep(data, copy);
 		watcher.close();
 	}).end(d, d);
 };

@@ -1,7 +1,6 @@
 'use strict';
 
-var isCopy   = require('es5-ext/object/is-copy')
-  , resolve  = require('path').resolve
+var resolve  = require('path').resolve
   , readFile = require('fs').readFile
 //  , inspect  = require('util').inspect
 
@@ -49,7 +48,7 @@ module.exports = function (t, a, d) {
 
 		// console.log("GOT", inspect(result, false, Infinity));
 		// console.log("EXPECTED", inspect(copy, false, Infinity));
-		a(isCopy(result, copy, Infinity), true);
+		a.deep(result, copy);
 		d();
 	});
 };
