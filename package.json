@@ -38,6 +38,7 @@
     "event-emitter": "0.2.x",
     "memoizee": "git://github.com/medikoo/memoize.git",
     "next": "0.3.x",
+    "path2": "0.1.x",
     "optimist": "0.3.x"
   },
   "devDependencies": {
