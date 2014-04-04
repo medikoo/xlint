@@ -46,5 +46,5 @@ module.exports = function (t, a, d) {
 		// console.log("COPY", inspect(copy, false, Infinity));
 		a.deep(data, copy);
 		watcher.close();
-	}).end(d, d);
+	}).done(d, d);
 };

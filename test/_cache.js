@@ -22,5 +22,5 @@ module.exports = function (t, a, d) {
 	}, 100))(function (result) {
 		a(result, null, "get: Other");
 		return unlink(cachePath);
-	}).end(d, d);
+	}).done(d, d);
 };

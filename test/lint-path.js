@@ -50,7 +50,7 @@ module.exports = function (t) {
 				a.deep(events, copy, "Events");
 
 				lint.close();
-			}).end(d, d);
+			}).done(d, d);
 		},
 		"File": function (a, d) {
 			var lint = t(linter, filePath, { watch: true });
@@ -66,7 +66,7 @@ module.exports = function (t) {
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a.deep(data, copy);
 				lint.close();
-			}).end(d, d);
+			}).done(d, d);
 		}
 	};
 };

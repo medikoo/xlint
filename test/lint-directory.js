@@ -113,7 +113,7 @@ module.exports = function (t) {
 				return deferred(writeFile(filePath, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc),
 					writeFile(ignorePath, ignoreOrgSrc))(false);
-			}, DELAY)).end(d, d);
+			}, DELAY)).done(d, d);
 		},
 		"Cache": function (a, d) {
 			t(linter, path, { cache: true, depth: Infinity })(function (report) {
@@ -137,7 +137,7 @@ module.exports = function (t) {
 					a.deep(r2, report, "Taken from cache");
 					return unlink(cachePath);
 				});
-			}).end(d, d);
+			}).done(d, d);
 		},
 		"Stream": function (a, d) {
 			var events = [], reader;
@@ -177,7 +177,7 @@ module.exports = function (t) {
 				];
 				normalize(events, copy);
 				a.deep(events, copy, "Events");
-			}).end(d, d);
+			}).done(d, d);
 		}
 	};
 };

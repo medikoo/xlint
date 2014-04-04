@@ -14,7 +14,7 @@ module.exports = function (t, a) {
 				a(result, false);
 			}), mode.isRoot(resolve(path))(function (result) {
 				a(result, true);
-			}))(false).end(d, d);
+			}))(false).done(d, d);
 		},
 		"Watch": function (a, d) {
 			var w1, w2;
@@ -24,7 +24,7 @@ module.exports = function (t, a) {
 				w2(function (result) { a(result, true); }))(function () {
 				w1.close();
 				w2.close();
-			}).end(d, d);
+			}).done(d, d);
 		}
 	};
 };

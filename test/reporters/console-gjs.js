@@ -9,6 +9,6 @@ module.exports = function (t, a) {
 	t(deferred({ 'foo': report }), { log: function (str) {
 		a(typeof str, 'string', "Log string");
 		invoked = true;
-	} }).end();
+	} }).done();
 	a(invoked, true);
 };

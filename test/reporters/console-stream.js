@@ -11,7 +11,7 @@ module.exports = function (t, a, d) {
 	t(promise, { log: function (str) {
 		a(typeof str, 'string', "Log string");
 		invoked = true;
-	} }).end();
+	} }).done();
 	promise.emit('change', { type: 'add', name: 'foo', report: report });
 	a(invoked, true);
 	process.nextTick(d);

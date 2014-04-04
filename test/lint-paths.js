@@ -130,7 +130,7 @@ module.exports = function (t) {
 				return deferred(writeFile(filePath, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc),
 					writeFile(ignorePath, ignoreOrgSrc))(false);
-			}, DELAY)).end(d, d);
+			}, DELAY)).done(d, d);
 		},
 		"Cache": function (a, d) {
 			t(linter, paths, { cache: true, depth: Infinity })(function (report) {
@@ -170,7 +170,7 @@ module.exports = function (t) {
 						return unlink(cachePath);
 					}
 				);
-			}).end(d, d);
+			}).done(d, d);
 		},
 		"Stream": function (a, d) {
 			var events = [], reader;
@@ -245,7 +245,7 @@ module.exports = function (t) {
 				// console.log("DATA", inspect(events, false, Infinity));
 				// console.log("COPY", inspect(copy, false, Infinity));
 				a.deep(events, copy, "Events");
-			}).end(d, d);
+			}).done(d, d);
 		}
 	};
 };

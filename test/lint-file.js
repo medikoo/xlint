@@ -56,7 +56,7 @@ module.exports = function (t) {
 				watcher.close();
 				return deferred(writeFile(path, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc))(false);
-			}, DELAY)).end(d, d);
+			}, DELAY)).done(d, d);
 		},
 		"Cache": function (a, d) {
 			t(linter, path, { cache: true })(function (report) {
@@ -68,7 +68,7 @@ module.exports = function (t) {
 					a(r2, report, "Taken from cache");
 					return unlink(cachePath);
 				});
-			}).end(d, d);
+			}).done(d, d);
 		}
 	};
 };

@@ -122,10 +122,10 @@ linters = unify(linters.map(function (linter) {
 }), options);
 
 reporter = reporter(linters, options);
-reporter.end();
+reporter.done();
 process.on('exit', function (code) {
 	if (code) return;
-	reporter.end(function (data) {
+	reporter.done(function (data) {
 		process.exit(some(data, function (report) {
 			return report.length;
 		}) ? 1 : 0);

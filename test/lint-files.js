@@ -115,7 +115,7 @@ module.exports = function (t) {
 				return deferred(writeFile(filePath, fileOrgSrc),
 					writeFile(optsPath, optsOrgSrc),
 					writeFile(ignorePath, ignoreOrgSrc))(false);
-			}, DELAY)).end(d, d);
+			}, DELAY)).done(d, d);
 		},
 		"Cache": function (a, d) {
 			t(linter, [file1Path, file2Path, filePath], { cache: true })(
@@ -142,7 +142,7 @@ module.exports = function (t) {
 						return unlink(cachePath);
 					});
 				}
-			).end(d, d);
+			).done(d, d);
 		}
 	};
 };
