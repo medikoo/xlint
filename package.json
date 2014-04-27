@@ -30,19 +30,19 @@
     "url": "https://github.com/medikoo/xlint/issues"
   },
   "dependencies": {
-    "cli-color": "0.2.x",
-    "d": "git://github.com/medikoo/d.git",
+    "cli-color": "~0.3.2",
+    "d": "~0.1.1",
     "deferred": "0.7.x",
-    "es5-ext": "git://github.com/medikoo/es5-ext.git",
-    "fs2": "git://github.com/medikoo/fs2.git",
-    "event-emitter": "0.3.x",
-    "memoizee": "git://github.com/medikoo/memoize.git",
-    "next": "0.3.x",
+    "es5-ext": "~0.10.2",
+    "fs2": "~0.2.1",
+    "event-emitter": "~0.3.1",
+    "memoizee": "~0.3.1",
+    "next": "0.4.x",
     "path2": "0.1.x",
     "optimist": "0.3.x"
   },
   "devDependencies": {
-    "tad": "~0.1.14"
+    "tad": "~0.1.21"
   },
   "license": "MIT",
   "engines": {
