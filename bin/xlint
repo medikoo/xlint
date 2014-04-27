@@ -5,7 +5,7 @@
 Error.stackTraceLimit = Infinity;
 
 // Prevent EMFILE errors
-require('fs2/lib/descriptors-handler')();
+require('fs2/descriptors-handler')();
 
 var noop      = require('es5-ext/function/noop')
   , some      = require('es5-ext/object/some')
