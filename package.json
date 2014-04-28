@@ -35,7 +35,7 @@
     "optimist": "0.3.x"
   },
   "devDependencies": {
-    "tad": "~0.1.21"
+    "tad": "0.2.x"
   },
   "scripts": {
     "test": "node node_modules/tad/bin/tad"
