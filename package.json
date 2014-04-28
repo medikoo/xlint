@@ -2,16 +2,10 @@
   "name": "xlint",
   "version": "0.1.0",
   "description": "Powerful CLI for any lint (JSLint/JSHint +) solution.",
+  "author": "Mariusz Nowak <medyk@medikoo.com>",
   "main": "lib/lint-path",
-  "scripts": {
-    "test": "node node_modules/tad/bin/tad lib"
-  },
   "bin": {
     "xlint": "./bin/xlint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/medikoo/xlint.git"
   },
   "keywords": [
     "cli",
@@ -24,10 +18,9 @@
     "quality",
     "validation"
   ],
-  "author": "Mariusz Nowak <medikoo+xlint@medikoo.com>",
-  "bugs": {
-    "mail": "medikoo+xlint@medikoo.com",
-    "url": "https://github.com/medikoo/xlint/issues"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/xlint.git"
   },
   "dependencies": {
     "cli-color": "~0.3.2",
@@ -44,8 +37,11 @@
   "devDependencies": {
     "tad": "~0.1.21"
   },
-  "license": "MIT",
+  "scripts": {
+    "test": "node node_modules/tad/bin/tad lib"
+  },
   "engines": {
     "node": ">=0.8"
-  }
+  },
+  "license": "MIT"
 }
