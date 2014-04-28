@@ -1,4 +1,5 @@
-# XLint – Powerful CLI for *any* lint solution
+# xlint
+## Powerful CLI for any lint solution
 
 * Built-in support for __[JSLint](http://www.jslint.com/)__ and __[JSHint](http://www.jshint.com/)__ linters
 * Picks all __.js and executable Node.js files__ from all directories recursively (nest level is configurable)
@@ -7,25 +8,24 @@
 * Additional [__ignore rules can be defined in _.lintignore_ files__](#ignoring-specific-files-and-directories)
 * __Optional caching__ mechanism (no re-evaluation with same options on not modified files)
 * Provides __live console__, that updates when code or configuration files are updated
-* __Damn fast__
 * Covered by [__over 150 unit tests__](#tests-)
 
 ## Usage
 
 ```
-$ xlint [options] <linter> [<paths>]
+$ xlint [options] [<paths>]
 ```
 
 for example:
 
 ```
-$ xlint path/to/jslint.js project/path
+$ xlint --linter=path/to/jslint-module.js project/path
 ```
 
 Interested in live console?
 
 ```
-$ xlint --watch path/to/jslint.js project/path
+$ xlint --watch --linter=path/to/jslint-module.js project/path
 ```
 
 ## Installation
@@ -36,6 +36,7 @@ $ npm install -g xlint
 
 ## Options
 
+* __linter__ `path` - Path to linter module. It must be CJS module, see e.g. [xlint-jslint](https://github.com/medikoo/xlint-jslint) for JSLint provided as one
 * __cache__ `bool` - Whether to cache generated reports. Very useful if we rerun the script on large projects. Cached reports are saved into _.lintcache_ file in your project main directory _[default: true]_
 * __color__ `bool` - Colorize console output _[default: true]_
 * __depth__ `number` - How deeply to recurse into subdirectories _[default: Infinity]_
@@ -77,39 +78,6 @@ otherarr one,             # Other array option, if we set just one token, we nee
 XLint doesn't support options defined in `jshintrc` files.  
 JSHint separates _global_ variable settings from other options, but in XLint configuration files, _global_ should be defined same as other options (as e.g. _predef_ for JSLint), it will be passed to JSHint as expected.
 
-## Support for other linters
-
-Internal architecture of XLint is well modularized. Other linters can be handled by XLint, by introducing report procesor module that translates output report into XLint supported format:
-
-```javascript
-// Custom linter handler
-
-module.exports = function (src, options) {
-	var rawReport, xlintReport
-	rawReport = linter(src, options); // Get report from linter we want to use
-	// Translate it into XLint friendly format, which is an array of warnings with it's meta data, e.g.:
-	// xlintReport = [
-	//   { line: 12, character: 43, message: 'Warning message' }
-	//   { line: 16, character: 3, message: 'Other warning message' }
-	// ];
-	//
-	// If there are no errors, empty array should be returned
-	//
-	// It's good to stamp our report with unique linter id (cache functionality distinguish linters by this):
-	// xlintReport.xlintId = 'MYCUSTOM_LINTER@0.2';
-	return xlintReport;
-};
-```
-
-When we got that, we can use our module as one of the linters supported by XLint.
-
-## TODO (v0.1.1 milestone)
-
-* Possibility to lint using more than one linter with one process
-* Git precommit hook
-* Provide simple plain text based read/write stream, so it can be easily plugged into external tools
-* Fix live console for Windows
-
-## Tests [![Build Status](https://secure.travis-ci.org/medikoo/xlint.png?branch=master)](https://secure.travis-ci.org/medikoo/xlint)
+## Tests [![Build Status](https://travis-ci.org/medikoo/xlint.png)](https://travis-ci.org/medikoo/xlint)
 
 	$ npm test
