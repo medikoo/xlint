@@ -32,7 +32,7 @@
   "dependencies": {
     "cli-color": "~0.3.2",
     "d": "~0.1.1",
-    "deferred": "0.7.x",
+    "deferred": "~0.7.1",
     "es5-ext": "~0.10.2",
     "fs2": "~0.2.1",
     "event-emitter": "~0.3.1",
