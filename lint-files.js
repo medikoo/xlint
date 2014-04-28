@@ -12,9 +12,9 @@ var getNull        = require('es5-ext/function/constant')(null)
   , path           = require('path')
   , commonPath     = require('path2/common')
   , isIgnored      = require('fs2/is-ignored')
-  , getOptsReader  = require('./_options/read').getReader
-  , normalizeOpts  = require('./_options/normalize')
-  , lintignoreMode = require('./_lintignore-mode')
+  , getOptsReader  = require('./lib/options/read').getReader
+  , normalizeOpts  = require('./lib/options/normalize')
+  , lintignoreMode = require('./lib/lintignore-mode')
   , LintFile       = require('./lint-file').LintFile
 
   , map = Array.prototype.map

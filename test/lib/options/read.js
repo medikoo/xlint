@@ -3,7 +3,7 @@
 var resolve = require('path').resolve
 //  , inspect = require('util').inspect
 
-  , path = resolve(__dirname, '../__playground/read/raz/dwa/foo.js');
+  , path = resolve(__dirname, '../../__playground/read/raz/dwa/foo.js');
 
 module.exports = function (t, a, d) {
 	var watcher;

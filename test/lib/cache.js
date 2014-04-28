@@ -6,8 +6,8 @@ var deferred  = require('deferred')
   , delay = deferred.delay, promisify = deferred.promisify
   , unlink = promisify(require('fs').unlink)
 
-  , cachePath = resolve(__dirname, '__playground/_cache/.lintcache')
-  , path = resolve(__dirname, '__playground/_cache/test.js');
+  , cachePath = resolve(__dirname, '../__playground/lib/cache/.lintcache')
+  , path = resolve(__dirname, '../__playground/lib/cache/test.js');
 
 module.exports = function (t, a, d) {
 	var report = {}, linter = { xlintId: 'TEST' };

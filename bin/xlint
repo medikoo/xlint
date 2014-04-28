@@ -11,9 +11,9 @@ var noop      = require('es5-ext/function/noop')
   , some      = require('es5-ext/object/some')
   , clc       = require('cli-color')
   , resolve   = require('path').resolve
-  , lintPaths = require('../lib/lint-paths')
-  , getLinter = require('../lib/_get-linter')
-  , unify     = require('../lib/_unify-reports')
+  , lintPaths = require('../lint-paths')
+  , getLinter = require('../lib/get-linter')
+  , unify     = require('../lib/unify-reports')
 
   , optimist = require('optimist')
 	.usage("usage: $0 [options] [<paths>]", {

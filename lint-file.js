@@ -11,10 +11,10 @@ var assign        = require('es5-ext/object/assign')
   , stat          = deferred.promisify(require('fs').stat)
   , resolve       = require('path').resolve
   , readFile      = require('fs2/read-file').readFile
-  , normalizeSrc  = require('./_normalize-source')
-  , normalizeOpts = require('./_options/normalize')
-  , readOptions   = require('./_options/read')
-  , cache         = require('./_cache')
+  , normalizeSrc  = require('./lib/normalize-source')
+  , normalizeOpts = require('./lib/options/normalize')
+  , readOptions   = require('./lib/options/read')
+  , cache         = require('./lib/cache')
 
   , LintFile, lintFile, parseOptions;
 

@@ -7,9 +7,9 @@ var isCallable     = require('es5-ext/object/is-callable')
   , deferred       = require('deferred')
   , resolve        = require('path').resolve
   , readdir        = require('fs2/readdir')
-  , getOptsReader  = require('./_options/read').getReader
-  , normalizeOpts  = require('./_options/normalize')
-  , lintignoreMode = require('./_lintignore-mode')
+  , getOptsReader  = require('./lib/options/read').getReader
+  , normalizeOpts  = require('./lib/options/normalize')
+  , lintignoreMode = require('./lib/lintignore-mode')
   , LintFiles      = require('./lint-files').LintFiles
 
   , isArray = Array.isArray, push = Array.prototype.push

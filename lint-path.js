@@ -5,7 +5,7 @@ var isCallable    = require('es5-ext/object/is-callable')
   , resolve       = require('path').resolve
   , stat          = require('deferred').promisify(require('fs').stat)
   , eePipe        = require('event-emitter/pipe')
-  , normalizeOpts = require('./_options/normalize')
+  , normalizeOpts = require('./lib/options/normalize')
   , lintDirectory = require('./lint-directory').lintDirectory
   , lintFile      = require('./lint-file').lintFile
 
