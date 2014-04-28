@@ -1,6 +1,6 @@
 {
   "name": "xlint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Powerful CLI for any lint (JSLint/JSHint +) solution.",
   "author": "Mariusz Nowak <medyk@medikoo.com>",
   "main": "lint-path",

@@ -1,2 +1,19 @@
+v0.2.0  --  2014.04.28
+* Move main modules from lib folder
+* Support for multiple linters in one batch
+* 'terse' console output mode
+* 'gjs' option to ouput log in Google Closure Linter format
+* 'realFileName' option
+* Provide linters via `--linter` option
+* In configuration file support multiple paths setting for one options block
+* Fix multiple path configuration resolution issue
+* Fix parse of JSHint globals
+* In console output display options sorted alphabetically
+* Fix configuration of EMFILE error pervention
+* Fix various important issues
+* Update to use latest versions of dependencies
+* Remove Makefile (it's environment agnostic package)
+* Improve documentation
+
 v0.1.0  --  2012.10.05
 * Initial
