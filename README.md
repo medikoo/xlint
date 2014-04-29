@@ -30,9 +30,7 @@ $ xlint --watch --linter=path/to/jslint-module.js project/path
 
 ## Installation
 
-```
-$ npm install -g xlint
-```
+	$ npm install -g xlint
 
 ## Options
 
