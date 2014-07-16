@@ -51,7 +51,7 @@ LintFiles.prototype = {
 			if (endsWith.call(name, '.' + this.fileExt)) {
 				return this.checkIsIgnored(name);
 			}
-			if (reNoExt.test(name)) {
+			if ((this.fileExt === 'js') && reNoExt.test(name)) {
 				return this.checkSheBang(name)(function (isNodeScript) {
 					return isNodeScript ? this.checkIsIgnored(name) : null;
 				});
