@@ -40,17 +40,12 @@ LintFiles = function () {
 };
 LintFiles.prototype = {
 	init: function () {
-		if (this.watch) {
-			this.ignores = {};
-		}
+		if (this.watch) this.ignores = {};
 		deferred.map(this.files, function (name) {
-			if (this.globalRules &&
-					applyGlobalRules(this.getFilename(name), this.globalRules)) {
+			if (this.globalRules && applyGlobalRules(this.getFilename(name), this.globalRules)) {
 				return null;
 			}
-			if (endsWith.call(name, '.' + this.fileExt)) {
-				return this.checkIsIgnored(name);
-			}
+			if (endsWith.call(name, '.' + this.fileExt)) return this.checkIsIgnored(name);
 			if ((this.fileExt === 'js') && reNoExt.test(name)) {
 				return this.checkSheBang(name)(function (isNodeScript) {
 					return isNodeScript ? this.checkIsIgnored(name) : null;
@@ -105,8 +100,7 @@ LintFiles.prototype = {
 			lint.on('change', function (report) {
 				this.result[name] = report;
 				if (this.promise.resolved || this.stream) {
-					this.promise.emit('change',
-						{ type: 'update', name: name, report: report });
+					this.promise.emit('change', { type: 'update', name: name, report: report });
 				}
 			}.bind(this));
 			lint.on('end', function () {
@@ -120,13 +114,10 @@ LintFiles.prototype = {
 		return lint(function (report) {
 			this.result[name] = report;
 			if (this.promise.resolved || this.stream) {
-				this.promise.emit('change',
-					{ type: 'add', name: name, report: report });
+				this.promise.emit('change', { type: 'add', name: name, report: report });
 			}
 		}.bind(this), function (err) {
-			if (!err.code || (err.code === 'EMFILE')) {
-				return err;
-			}
+			if (!err.code || (err.code === 'EMFILE')) return err;
 			if (this.ignores) {
 				this.ignores[name].close();
 				delete this.ignores[name];
@@ -139,17 +130,14 @@ LintFiles.prototype = {
 			delete this.result[name];
 			delete this.linters[name];
 			if (this.promise.resolved || this.stream) {
-				this.promise.emit('change',
-					{ type: 'remove', name: name });
+				this.promise.emit('change', { type: 'remove', name: name });
 			}
 		}
 	},
 	close: function () {
 		if (this.linters) {
 			forEach(this.linters, invoke('close'));
-			if (this.ignores) {
-				forEach(this.ignores, invoke('close'));
-			}
+			if (this.ignores) forEach(this.ignores, invoke('close'));
 			delete this.linters;
 		}
 	}
@@ -175,9 +163,8 @@ lintFiles = function (linter, files, options) {
 	lint.cache = options.cache;
 	lint.fileExt = options.fileExt || 'js';
 	if (options.ignoreRules) {
-		ignoreRules = isArray(options.ignoreRules) ?
-				options.ignoreRules.concat('lint') :
-				[String(options.ignoreRules), 'lint'];
+		ignoreRules = isArray(options.ignoreRules)
+			? options.ignoreRules.concat('lint') : [String(options.ignoreRules), 'lint'];
 	} else {
 		ignoreRules = ['lint'];
 	}
@@ -207,9 +194,7 @@ module.exports = exports = function (linter, files/*, options, cb*/) {
 		options = {};
 	} else {
 		options = Object(options);
-		if (options.options) {
-			options.options = normalizeOpts(options.options);
-		}
+		if (options.options) options.options = normalizeOpts(options.options);
 	}
 
 	return lintFiles(linter, files, options).cb(cb);
