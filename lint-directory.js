@@ -2,9 +2,11 @@
 
 var isCallable     = require('es5-ext/object/is-callable')
   , callable       = require('es5-ext/object/valid-callable')
+  , reEscape       = require('es5-ext/reg-exp/escape')
   , endsWith       = require('es5-ext/string/#/ends-with')
   , d              = require('d')
   , deferred       = require('deferred')
+  , memoize        = require('memoizee/plain')
   , resolve        = require('path').resolve
   , readdir        = require('fs2/readdir')
   , getOptsReader  = require('./lib/options/read').getReader
@@ -13,12 +15,12 @@ var isCallable     = require('es5-ext/object/is-callable')
   , LintFiles      = require('./lint-files').LintFiles
 
   , isArray = Array.isArray, push = Array.prototype.push
+  , getReExtension, lintDirectory, LintDirectory;
 
-  , reExtension = new RegExp('(?:^|[\\/\\\\])(?:' +
-		'[\0-\\-0-\\[\\]-\uffff]+|' +
-		'[\0-\\.0-\\[\\]-\uffff]*\\.js)$')
-
-  , lintDirectory, LintDirectory;
+getReExtension = memoize(function (ext) {
+	return new RegExp('(?:^|[\\/\\\\])(?:[\0-\\-0-\\[\\]-\uffff]+|' +
+		'[\0-\\.0-\\[\\]-\uffff]*\\.' + reEscape(ext) + ')$')
+});
 
 LintDirectory = function () { LintFiles.call(this); };
 LintDirectory.prototype = Object.create(LintFiles.prototype, {
@@ -26,7 +28,7 @@ LintDirectory.prototype = Object.create(LintFiles.prototype, {
 		var waiting;
 		this.reader = readdir(this.root, { watch: this.watch, depth: this.depth,
 			stream: this.stream, ignoreRules: this.ignoreRules, type: { file: true },
-			pattern: reExtension });
+			pattern: getReExtension(this.extension) });
 		if (this.watch || this.stream) {
 			if (this.stream) {
 				waiting = [];
@@ -82,6 +84,7 @@ lintDirectory = function (linter, path, options) {
 	lint.watch = options.watch;
 	lint.cache = options.cache;
 	lint.depth = options.depth;
+	lint.extension = options.extension || 'js';
 	lint.stream = options.stream;
 	if (options.ignoreRules) {
 		lint.ignoreRules = isArray(options.ignoreRules) ?
