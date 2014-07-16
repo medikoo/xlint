@@ -28,7 +28,7 @@ LintDirectory.prototype = Object.create(LintFiles.prototype, {
 		var waiting;
 		this.reader = readdir(this.root, { watch: this.watch, depth: this.depth,
 			stream: this.stream, ignoreRules: this.ignoreRules, type: { file: true },
-			pattern: getReExtension(this.extension) });
+			pattern: getReExtension(this.fileExt) });
 		if (this.watch || this.stream) {
 			if (this.stream) {
 				waiting = [];
@@ -84,7 +84,7 @@ lintDirectory = function (linter, path, options) {
 	lint.watch = options.watch;
 	lint.cache = options.cache;
 	lint.depth = options.depth;
-	lint.extension = options.extension || 'js';
+	lint.fileExt = options.fileExt || 'js';
 	lint.stream = options.stream;
 	if (options.ignoreRules) {
 		lint.ignoreRules = isArray(options.ignoreRules) ?

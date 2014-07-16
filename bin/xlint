@@ -34,6 +34,9 @@ var noop      = require('es5-ext/function/noop')
 		linter: {
 			description: "[Mandatory] Linter path"
 		},
+		fileExt: {
+			description: "File extension (defaults to 'js')"
+		},
 		realFilename: {
 			description: "Real filename of resource"
 		},

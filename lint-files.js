@@ -48,7 +48,7 @@ LintFiles.prototype = {
 					applyGlobalRules(this.getFilename(name), this.globalRules)) {
 				return null;
 			}
-			if (endsWith.call(name, '.js')) {
+			if (endsWith.call(name, '.' + this.fileExt)) {
 				return this.checkIsIgnored(name);
 			}
 			if (reNoExt.test(name)) {
@@ -173,6 +173,7 @@ lintFiles = function (linter, files, options) {
 	lint.options = options.options;
 	lint.watch = options.watch;
 	lint.cache = options.cache;
+	lint.fileExt = options.fileExt || 'js';
 	if (options.ignoreRules) {
 		ignoreRules = isArray(options.ignoreRules) ?
 				options.ignoreRules.concat('lint') :
