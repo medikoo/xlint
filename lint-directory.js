@@ -62,6 +62,7 @@ LintDirectory.prototype = Object.create(LintFiles.prototype, {
 	}),
 	prelint: d(function (name) {
 		if (endsWith.call(name, this.fileExt)) return this.lint(name);
+		if (this.fileExt !== 'js') return null;
 		return this.checkSheBang(name)(function (isNodeScript) {
 			return isNodeScript ? this.lint(name) : null;
 		}.bind(this));
