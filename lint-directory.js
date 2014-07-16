@@ -19,7 +19,7 @@ var isCallable     = require('es5-ext/object/is-callable')
 
 getReExtension = memoize(function (ext) {
 	return new RegExp('(?:^|[\\/\\\\])(?:[\0-\\-0-\\[\\]-\uffff]+|' +
-		'[\0-\\.0-\\[\\]-\uffff]*\\.' + reEscape(ext) + ')$')
+		'[\0-\\.0-\\[\\]-\uffff]*\\.' + reEscape(ext) + ')$');
 });
 
 LintDirectory = function () { LintFiles.call(this); };
