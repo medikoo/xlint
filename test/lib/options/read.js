@@ -15,6 +15,7 @@ module.exports = function (t, a, d) {
 			browser: false,
 			cap: false,
 			continue: false,
+			markoZagalo: true,
 			newcap: false,
 			predef: ['foo', 'last', 'marko', 'prelast', 'raz'],
 			eqeq: false,
