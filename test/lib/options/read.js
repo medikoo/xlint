@@ -11,8 +11,15 @@ module.exports = function (t, a, d) {
 	watcher(function (opts) {
 		var copy = {
 			adsafe: true,
+			bitwise: false,
+			browser: false,
+			cap: false,
+			continue: false,
+			newcap: false,
 			predef: ['foo', 'last', 'marko', 'prelast', 'raz'],
+			eqeq: false,
 			es5: true,
+			evil: false,
 			forin: true,
 			fragment: true,
 			nomen: true
