@@ -1,3 +1,9 @@
+v0.2.1  --  2014.07.22
+* Support non .js file extensions (in case of directory input provide fileExt option)
+* Improve options resolution:
+  - Do not filter out negated options
+  - Support hyphens in option names
+
 v0.2.0  --  2014.04.28
 * Move main modules from lib folder
 * Support for multiple linters in one batch
