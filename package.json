@@ -35,9 +35,12 @@
     "optimist": "0.3.x"
   },
   "devDependencies": {
-    "tad": "0.2.x"
+    "tad": "0.2.x",
+    "xlint-jslint-medikoo": "~0.1.1"
   },
   "scripts": {
+    "lint": "node bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
+    "lint-console": "node bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
     "test": "node node_modules/tad/bin/tad"
   },
   "engines": {
