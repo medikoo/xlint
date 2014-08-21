@@ -9,14 +9,14 @@ module.exports = function (t, a) {
 
 	a(mode.filename, '.lintignore', "Filename");
 	return {
-		"Regular": function (a, d) {
+		Regular: function (a, d) {
 			deferred(mode.isRoot(resolve(path, 'foo'))(function (result) {
 				a(result, false);
 			}), mode.isRoot(resolve(path))(function (result) {
 				a(result, true);
 			}))(false).done(d, d);
 		},
-		"Watch": function (a, d) {
+		Watch: function (a, d) {
 			var w1, w2;
 			w1 = mode.isRootWatcher(resolve(path, 'foo'));
 			w2 = mode.isRootWatcher(resolve(path));

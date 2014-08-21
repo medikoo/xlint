@@ -10,7 +10,7 @@ var resolve   = require('path').resolve
 
 module.exports = function (t) {
 	return {
-		"Directory": function (a, d) {
+		Directory: function (a, d) {
 			var lint, events = [];
 			lint = t(linter, path, { depth: Infinity, stream: true, watch: true });
 			lint.on('change', function (data) {
@@ -52,7 +52,7 @@ module.exports = function (t) {
 				lint.close();
 			}).done(d, d);
 		},
-		"File": function (a, d) {
+		File: function (a, d) {
 			var lint = t(linter, filePath, { watch: true });
 			lint(function (data) {
 				var copy = { ".": [

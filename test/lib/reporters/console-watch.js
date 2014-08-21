@@ -7,7 +7,7 @@ module.exports = function (t, a, d) {
 	  , promise;
 	report.src = 'Lorem ipsum';
 	report.options = {};
-	promise = deferred({ 'foo': report });
+	promise = deferred({ foo: report });
 	t(promise, { log: function (str) {
 		a(typeof str, 'string', "Log string");
 		invoked = true;

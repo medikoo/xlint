@@ -58,7 +58,7 @@ module.exports = function (t) {
 					writeFile(optsPath, optsOrgSrc))(false);
 			}, DELAY)).done(d, d);
 		},
-		"Cache": function (a, d) {
+		Cache: function (a, d) {
 			t(linter, path, { cache: true })(function (report) {
 				a.deep(report[0], { line: 2, character: 11,
 					message: 'Unexpected \'&\'.' }, "#1");

@@ -117,7 +117,7 @@ module.exports = function (t) {
 					writeFile(ignorePath, ignoreOrgSrc))(false);
 			}, DELAY)).done(d, d);
 		},
-		"Cache": function (a, d) {
+		Cache: function (a, d) {
 			t(linter, [file1Path, file2Path, filePath], { cache: true })(
 				function (report) {
 					var copy = {

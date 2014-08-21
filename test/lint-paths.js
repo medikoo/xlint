@@ -132,7 +132,7 @@ module.exports = function (t) {
 					writeFile(ignorePath, ignoreOrgSrc))(false);
 			}, DELAY)).done(d, d);
 		},
-		"Cache": function (a, d) {
+		Cache: function (a, d) {
 			t(linter, paths, { cache: true, depth: Infinity })(function (report) {
 				var copy = {
 					'raz/dir2/test.js': [
@@ -172,7 +172,7 @@ module.exports = function (t) {
 				);
 			}).done(d, d);
 		},
-		"Stream": function (a, d) {
+		Stream: function (a, d) {
 			var events = [], reader;
 			reader = t(linter, paths, { depth: Infinity, stream: true });
 			reader.on('change', function (data) {
