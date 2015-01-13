@@ -45,6 +45,13 @@ module.exports = function (t, a, d) {
 		copy[resolve('/one/two/testo-fanfaro.js')] = {
 			predef: mod2
 		};
+		copy[resolve('/one/two/miszka')] = {
+			foo: true
+		};
+		copy[resolve('/one/two/mapka')] = {
+			foo: true,
+			bar: true
+		};
 
 		// console.log("GOT", inspect(result, false, Infinity));
 		// console.log("EXPECTED", inspect(copy, false, Infinity));

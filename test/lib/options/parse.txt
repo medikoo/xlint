@@ -26,5 +26,11 @@ devel
 eqeq
 predef- raz, dwa, one
 
+./miszka
+./mapka
+foo
+
+./mapka
+bar
 
 #comment
