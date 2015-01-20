@@ -1,3 +1,8 @@
+v0.2.2  --  2015.01.20
+* Fix resolution of multi paths settings from .lint configuration files
+* Fix spelling of LICENSE
+* Configure lint scripts
+
 v0.2.1  --  2014.07.22
 * Support non .js file extensions (in case of directory input provide fileExt option)
 * Improve options resolution:
