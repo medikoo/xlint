@@ -23,7 +23,7 @@
     "url": "git://github.com/medikoo/xlint.git"
   },
   "dependencies": {
-    "cli-color": "~1.2",
+    "cli-color": "~1.4",
     "d": "1",
     "deferred": "~0.7.2",
     "es5-ext": "~0.10.4",
